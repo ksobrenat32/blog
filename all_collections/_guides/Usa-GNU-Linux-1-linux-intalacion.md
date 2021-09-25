@@ -21,34 +21,34 @@ Bueno primero que nada necesitamos descargar dos cosas, [ventoy](https://ventoy.
 
 1. Dirígete a la página de [descargas](https://github.com/ventoy/Ventoy/releases) y busca el ventoy-windows.zip más reciente y descárgalo. 
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-01.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-01.png)
 
 2. Ve a la carpeta y con clic derecho descomprímelo y accede a la carpeta descomprimida. (si no puedes descomprimir, puedes usar el programa [7zip](https://7-zip.org/))
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-02.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-02.jpg)
 
 3. Ejecuta Ventoy2Disk.exe (no es necesario que te aparezca la extensión .exe) te pedirá permisos de administrador.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-03.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-03.jpg)
 
 4. Verás a tu memoria en el apartado de Device, asegúrate que es la correcta de lo contrario podrías formatear el dispositivo incorrecto, da click en install.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-04.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-04.jpg)
 
 5. Te indicará dos advertencias que tendrás que aceptar
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-05.jpg)
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-06.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-05.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-06.jpg)
 
 6. ¡listo! tu memoria usb ahora es un dispositivo desde el que se puede arrancar una gran variedad de sistemas operativos.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/ventoy-07.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/ventoy-07.jpg)
 
 #### Kubuntu
 
 Ahora toca descargar [kubuntu](https://kubuntu.org/getkubuntu/).
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-page.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-page.png)
 
 **Descarga el más reciente para evitar problemas de compatibilidad**
 
@@ -79,7 +79,7 @@ Desafortunadamente muchos fabricantes bloquean las opciones de arranque de las c
 
 Ya dentro del menú de bios buscarás en el apartado de boot/arranque o de security/seguridad alguna opción que menciona al secure boot o arranque seguro y lo tendrás que desactivar, esto es para evitar errores al correr desde la usb. 
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/secure-boot.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/secure-boot.jpg)
 
 Ya que lo desactivaste solo guardas y apagas la computadora, en caso de que te metas a Windows, apagas desde el menú de inicio de sesión.
 
@@ -89,17 +89,17 @@ Al arrancar tu computadora pulsarás un botón de selector de arranque, de nuevo
 
 Dejarás que kubuntu arranque hasta que te presente un menú, en este te dará varias opciones, selecciona kubuntu.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-boot.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-boot.png)
 
 Puedes cambiar el idioma y pulsa probar kubuntu
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-try.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-try.png)
 
 ## Dentro del escritorio
 
 Ahora estás dentro del sistema linux, explóralo, métete a internet (firefox es el navegador incluido) escribe documentos de texto, explora la configuración (a decir verdad debian es un poco feo por default) solo recuerda que al apagar la computadora todos los cambios que hagas en el sistema se borrarán (cosas que descargues de internet, documentos que escribas, etc.).
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-desktop1.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-desktop1.png)
 
 Debes de probar la mayor parte de tu hardware, cámara, micrófono, tarjeta wifi. etc. si todo funciona por si solo, ¡Felicidades! tu computadora corre linux perfectamente, en el caso contrario tendrás que investigar que es lo que no te funciona e intentar solucionarlo. 
 
@@ -111,11 +111,11 @@ Si ya estás seguro de querer instalar linux tienes dos opciones, la primera es 
 
 Para iniciar este proceso tenemos que arrancar con windows, con una cuenta con privilegios de administrador accederemos al programa llamado "administrador de particiones o de discos" 
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/win-part.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/win-part.png)
 
 Una vez dentro verás en la parte de abajo el disco 0 con mínimo 3 particiones, la más grande se marcará como tu disco c y este será al que reduciremos en espacio. Da un click derecho en la partición y elige reducir volumen o shrink volume, debes de escoger cuanto vas a reducir el espacio, lo mínimo para un entorno gráfico son 10 GB, pero si le piensas dar un uso relativamente frecuente, un mínimo de 30 GB es lo que yo te recomiendo, recuerda que en la opción de cuanto espacio lo quieres reducir te lo pide en MB así que si son 30 GB tendrás que escribir 30720. 
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/win-part2.jpg)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/win-part2.jpg)
 
 Una vez con ese espacio libre, el disco se verá así 
 
@@ -129,34 +129,34 @@ Recuerda tener tu disco respaldado incluso si quieres hacer un dualboot pues se 
 
 1.  Escoge tu distribución de teclado, normalmente será latinoamericano o español.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-keyboard.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-keyboard.png)
 
 2. Escoge las aplicaciones, te recomiendo una instalación mínima pues será más ligera, pero si deseas tener múltiple software desde la instalación, escoge la normal. Selecciona ambas opciones extra, la primera es para tener un sistema actualizado desde el inicio y la segunda para instalar drivers y formatos no libres, esto facilitará tu experiencia.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-minimal.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-minimal.png)
 
 3. Selecciona tu disco, si tu computadora tiene múltiples discos, escoge donde lo deseas instalar. En caso de que hayas llevado a cabo los pasos para el Dualboot, verás la opción de instalar junto a Windows 10.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-disk.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-disk.png)
 
 Si ves todo correcto, das aceptar.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-disk2.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-disk2.png)
 
 4. Escoge tu localización, esto es para la zona horaria.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-timezone.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-timezone.png)
 
 5. Crea tu usuario, recuerda usar una contraseña fuerte.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-user.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-user.png)
 
 6. Empieza la instalación y espera a que termine y reinicias.
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-end.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-end.png)
 
 ## ¡Felicidades!
 
-![]({{site.baseurl}}/assets/pictures/GNU-Linux/kubuntu-login.png)
+![]({{site.baseurl}}/assets/pictures/Usa-GNU-Linux/kubuntu-login.png)
 
 Con tu sistema listo toca llevar a cabo una capacitación básica de su uso, pasa con gusto a la sección [Básico]({{site.baseurl}}/Usa-GNU-Linux/2).

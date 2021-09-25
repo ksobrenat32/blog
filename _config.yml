@@ -24,6 +24,8 @@ collections:
     output: true
   projects:
     output: true
+  guides:
+    output: true
 
 defaults:
   - scope:
@@ -34,6 +36,6 @@ defaults:
       path: "_posts"
     values:
       layout: "post"
-      permalink: /posts/:categories/:year/:month/:day/:title/
+      permalink: /:categories/:year/:month/:day/:title
 
 exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]
