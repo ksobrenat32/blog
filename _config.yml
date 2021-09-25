@@ -1,0 +1,39 @@
+title: Mi blog
+markdown: kramdown
+url: ""
+baseurl: "/blog"
+
+author:
+  name: ksobrenatural
+  email: ksobrenatural.7r4ty@8shield.net
+
+plugins:
+  - jekyll-paginate
+  - jemoji
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+paginate_path: "/page:num/"
+
+paginate: 20
+
+collections_dir: all_collections
+collections:
+  posts:
+    output: true
+  projects:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "post"
+  - scope:
+      path: "_posts"
+    values:
+      layout: "post"
+      permalink: /posts/:categories/:year/:month/:day/:title/
+
+exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]

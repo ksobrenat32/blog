@@ -1,0 +1,10 @@
+list:
+  - title: Inicio
+    url: ""
+  - title: "Sobre Mi"
+    url: about
+  - title: "GNU-Linux"
+    url:  Usa-GNU-Linux
+  - title: Feed
+    url: feed.xml
+    target: "_blank"

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mi blog | Usa GNU/Linux software</title>
+  <link rel="stylesheet" href="/blog/assets/css/mark.css" />
+  <link rel="stylesheet" href="/blog/assets/css/custom.css" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <!-- PILL JS LOADER SYLE -->
+  <style>
+    #indicator {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      display: none;
+      background-color: #72b6b5;
+    }
+
+    .is-loading {
+      display: block;
+      animation: blink 1.5s linear infinite;
+    }
+
+    @keyframes blink {
+      from,
+      to {
+        background-color: #72b6b5;
+      }
+
+      50% {
+        background-color: #42b983;
+      }
+    }
+
+    #project-link {
+      display: block;
+      position: fixed;
+      padding: 8px;
+      top: 0;
+      right: 0;
+    }
+  </style>
+  <!-- PILL JS -->
+  <script src="/blog/assets/js/pill.min.js"></script>
+  <script>
+    // this is for pill js as the normal link wont work
+    function openLink(url) {
+      window.open(url, "_blank");
+    }
+  </script>
+</head>
+
+  <body>
+    <div id="indicator"></div>
+    <div id="page">
+      <style>
+        .title {
+          padding: 10%;
+          color: #101417;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          background: #f78e66;
+          display: grid;
+        }
+        .meta {
+          font-size: 0.7rem;
+          font-weight: normal;
+          text-transform: uppercase;
+        }
+      </style>
+      <!-- header -->
+      <header>
+	<a href="/blog/">
+		<h3>Mi blog</h3>
+	</a>
+</header>
+
+      <!-- nav -->
+      <nav>
+	
+		
+			<a href="/blog/">Inicio</a>
+		
+	
+		
+			<a href="/blog/about">Sobre Mi</a>
+		
+	
+		
+			<a href="/blog/Usa-GNU-Linux">GNU-Linux</a>
+		
+	
+		
+			<a href="#!" onclick="openLink('/blog/feed.xml')">Feed</a>
+		
+	
+</nav>
+      <!-- page content -->
+      <main class="content">
+        <p class="title">
+          Usa GNU/Linux software <span class="meta">Written By ksobrenatural</span>
+        </p>
+        <p>En GNU/Linux la instalación y actualización del software se lleva a cabo un poco diferente, puede que estés acostumbrado a que para descargar un nuevo programa tengas que ir a una página web, descargar un ejecutable que te guiará por una serie de pasos hasta que logres instalarlo, si tienes suerte el programa buscará automáticamente por actualizaciones, pero si no, te quedaras con software desatendido.</p>
+
+<h2 id="entendamos-a-los-administradores-de-paquetes">Entendamos a los administradores de paquetes</h2>
+
+<p>En linux se usan administradores de paquetes (programas) junto con sus repositorios. Imagínalo como una biblioteca, le pides al bibliotecario (administrador de paquetes) que te consiga un libro (paquete/programa), si está en la biblioteca te lo entregará, pero si no está te tocará conseguirlo externamente.</p>
+
+<p>La ventaja de tener una biblioteca(repositorio) es que sabes que los libros que están ahí están han sido revisados y autorizados por tu distribución de Linux, no contienen virus y probablemente sean de código abierto.</p>
+
+<p>En Debian, y sus derivadas como kubuntu, el administrador de paquetes se llama aptitude, mejor conocido simplemente como apt, tienen un funcionamiento simple de comprender, en primer lugar tiene que investigar preguntándole a los repositorios, que como ya mencionamos son como grandes almacenes de software, si existe alguna versión nueva de los paquetes instalados o se ha añadido al catálogo algún programa nuevo, en caso de que así sea, te lo hará notar. Esto se consigue con el comando</p>
+
+<blockquote>
+  <blockquote>
+    <p>Se usa sudo pues la modificación de programas instalados solo lo puede realizar el administrador</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+</code></pre></div></div>
+
+<p>En caso de que existan versiones nuevas del software instalado y se desee llevar a cabo la actualización, se puede llevar a cabo con</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt upgrade
+</code></pre></div></div>
+
+<p>¿Simple no?, si quieres buscar si existe un programa, por ejemplo, busquemos el programa neofetch, es un programa que te arroja datos básicos del equipo junto a una bonita imagen de la distribución linux, necesitamos ejecutar</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt search neofetch
+    
+    Sorting... Done
+    Full Text Search... Done
+    neofetch/focal 7.0.0-1 all
+        Shows Linux System Information with Distribution Logo
+</code></pre></div></div>
+
+<p>Puedes ver que efectivamente lo encontró, su versión y una pequeña descripción de lo que hace el programa, para instalarlo se hace con</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install neofetch
+</code></pre></div></div>
+
+<p>Se imprime mucha información, entre ella:</p>
+<ul>
+  <li>Los paquetes que se van a instalar además del programa que deseas a estos se le llaman dependencias, muchas veces cuando alguien escribe un programa no quiere volver a escribir el código que alguien más ya escribió, por lo que mejor te hace descargar esos programas.</li>
+  <li>Los paquetes sugeridos, programas que pueden mejorar tu experiencia</li>
+  <li>Cuantos programas se actualizan, se remueven y se instalan</li>
+  <li>El peso de la descarga y el espacio que ocupará en disco.</li>
+  <li>Te pide tu autorización</li>
+</ul>
+
+<p>Para seguir adelante, acepta si deseas instalarlo, y ahora prueba ejecutando</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>neofetch
+</code></pre></div></div>
+
+<p>¿Bonito, no? bueno todo esto lo puedes también hacer desde un entorno gráfico, busca la tienda de aplicaciones en tu distribución, verás que es como la del teléfono, te simplifica las cosas pues desde ahí puedes instalar, actualizar y desinstalar programas, pero muchas veces hacerlo por terminal te facilita y acelera las cosas.</p>
+
+<h2 id="alternativas">Alternativas</h2>
+
+<p>Algunas veces no vas a encontrar lo que buscas en tu administrador de paquetes, en este caso tienes varias opciones, buscar a la empresa que desarrolla el programa que quieres y ver si tiene instrucciones oficiales para linux, de ser así puede que lo tenga disponible en varias opciones, las principales son:</p>
+
+<ul>
+  <li><strong>Ejecutable</strong>: Simplemente lo corres ya sea desde la terminal o el administrador de archivos.</li>
+  <li><strong>AppImage</strong>: A grandes rasgos es lo mismo que un ejecutable.</li>
+  <li><strong>Repositorio externo</strong>: Algunos mantienen sus propios repositorios para poder ellos publicar su software sin restricciones, sin embargo, no lo recomiendo pues esto puede provocar fallos en tu sistema operativo a largo plazo por conflictos entre versiones de programas.</li>
+  <li><strong>Flatpak o Snap</strong>: A grandes rasgos es como un repositorio externo, pero aislado de tu sistema, es de las formas más fáciles que tienes de instalar software, te recomiendo mucho más flatpak pues es más rápido. La desventaja es que en primer lugar tendrás que instalar ya sea flatpak o snap y posteriormente instalar tu programa además de que tendrás que actualizar tanto tu repositorio base como flatpak/snap. La ventaja es su amplia cantidad de software, por ejemplo, la tienda oficial de flatpak es <a href="https://flathub.org/home">flathub</a> puedes encontrar básicamente todo lo que necesites.</li>
+  <li><strong>Instrucciones del desarrollador</strong>: Algunas veces puedes encontrar instrucciones de como instalarlo, sin embargo recuerda tener cuidado con lo que tecleas en la terminal, en especial si usas sudo.</li>
+</ul>
+
+<p>Todas las opciones tienen sus pros y contras, siempre primero busca el software en tu repositorio con <em>apt</em>, pero si no tienes otra opción, las que mayormente te recomiendo es buscar ejecutables, AppImage o la versión en flatpak, pero puedes probar lo que te sea más conveniente.</p>
+
+<h2 id="ya-casi">¡Ya casi!</h2>
+
+<p>Has entendido lo básico sobre la administración de programas con apt y algunas alternativas, recuerda siempre estar pendiente de lo que tecleas, nadie se hace responsable más que tú.</p>
+
+<p>Ya casi terminas esta guía básica, pasa a la sección <a href="/blog/Usa-GNU-Linux/4">Extra</a></p>
+
+      </main>
+
+      <!-- footer -->
+      <footer>
+	<p>
+		ksobrenatural | Mi blog
+	</p>
+</footer>
+<script src='/blog/assets/js/site.js' id="pill_site_script" type='module'></script>
+    </div>
+  </body>
+</html>

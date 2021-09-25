@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mi blog | Blog</title>
+  <link rel="stylesheet" href="/blog/assets/css/mark.css" />
+  <link rel="stylesheet" href="/blog/assets/css/custom.css" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <!-- PILL JS LOADER SYLE -->
+  <style>
+    #indicator {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      display: none;
+      background-color: #72b6b5;
+    }
+
+    .is-loading {
+      display: block;
+      animation: blink 1.5s linear infinite;
+    }
+
+    @keyframes blink {
+      from,
+      to {
+        background-color: #72b6b5;
+      }
+
+      50% {
+        background-color: #42b983;
+      }
+    }
+
+    #project-link {
+      display: block;
+      position: fixed;
+      padding: 8px;
+      top: 0;
+      right: 0;
+    }
+  </style>
+  <!-- PILL JS -->
+  <script src="/blog/assets/js/pill.min.js"></script>
+  <script>
+    // this is for pill js as the normal link wont work
+    function openLink(url) {
+      window.open(url, "_blank");
+    }
+  </script>
+</head>
+
+  <body>
+    <div id="indicator"></div>
+    <div id="page">
+      <style>
+        .title {
+          padding: 5%;
+          color: #101417;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          background: #f78e66;
+          display: grid;
+        }
+        .meta {
+          font-size: 0.7rem;
+          font-weight: normal;
+          text-transform: uppercase;
+        }
+      </style>
+      <!-- header -->
+      <header>
+	<a href="/blog/">
+		<h3>Mi blog</h3>
+	</a>
+</header>
+
+      <!-- nav -->
+      <nav>
+	
+		
+			<a href="/blog/">Inicio</a>
+		
+	
+		
+			<a href="/blog/about">Sobre Mi</a>
+		
+	
+		
+			<a href="/blog/Usa-GNU-Linux">GNU-Linux</a>
+		
+	
+		
+			<a href="#!" onclick="openLink('/blog/feed.xml')">Feed</a>
+		
+	
+</nav>
+      <!-- page content -->
+      <main class="post-list">
+        <p class="title">Blog</p>
+        
+
+<a href="/blog/posts/kvm-qemu/2021/08/17/kvm-server/">Servidor de virtualización en Raspberry Pi 4</a>
+
+
+
+
+
+<a href="/blog/posts/personal/2021/08/07/Intro/">¿Un blog?</a>
+
+      </main>
+
+      <!-- footer -->
+      <footer>
+	<p>
+		ksobrenatural | Mi blog
+	</p>
+</footer>
+<script src='/blog/assets/js/site.js' id="pill_site_script" type='module'></script>
+    </div>
+  </body>
+</html>
