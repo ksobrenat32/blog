@@ -1,0 +1,66 @@
+I"<p>El tan esperado final, lo lograste, ¿ya viste que GNU/Linux no es nada difícil? al menos a simple vista es muy sencillo y te puedo asegurar que si la mayor parte del tiempo que pasas en la computadora lo haces en un navegador de internet, no encontraras ni una sola desventaja sobre cualquier otro sistema operativo.</p>
+
+<p>Esta sección se va a dedicar a sugerir temas o fuentes de donde puedas aprender mas cosas o resolver problemas que te puedan surgir. La mayoría será en ingles pues es el lenguaje de internet, sin embargo siempre puedes usar un <a href="https://libretranslate.com/">traductor</a> en caso de no conocer el lenguaje.</p>
+
+<h2 id="temas-sugeridos-a-investigar">Temas sugeridos a investigar</h2>
+
+<h3 id="privacidad">Privacidad</h3>
+
+<p>Ya hiciste el paso de salir de un sistema operativo como Windows o MacOS que registran todo lo que haces, ¿por qué no intentar hacerlo en otras cosas además del sistema operativo? Puedes buscar alternativas libres para herramientas que usas diariamente, por ejemplo cambiar Whatsapp por algo como <a href="https://signal.org/">Signal</a> que funcionan básicamente igual pero sin Facebook rastreandote. Son cosas sencillas que puedes volver un hábito. Te invito a investigar sobre el tema, algunas fuentes que te recomiendo son <a href="https://www.privacyguides.org/">PrivacyGuides</a>, <a href="https://www.youtube.com/c/Techlore">Techlore</a>.</p>
+
+<h3 id="como-proteger-tu-computadora">Como proteger tu computadora</h3>
+
+<p>Ya estas en GNU/Linux, eso vuelve tu computadora un poco mas protegida pero no al 100%, necesitas aprender que cosas hacer y no hacer tanto localmente como en línea y se deben volver habito, una de ellas siendo preferir software libre, pero lo dejo a tu decisión.</p>
+
+<h3 id="tu-propio-servidor">¿Tu propio servidor?</h3>
+
+<p>Siii, una vez que empieces a entender un poco de Linux puedes aprender como montar servidores que al final son una computadora sin pantalla, no es difícil pero si muy interesante, tal vez puedes pensar que no te sirve de nada, pero por experiencia te puedo decir que vuelven tu vida más cómoda. Algunas cosas en las que te pueden ayudar es a automatizar dispositivos inteligentes si cuentas con ellos, bloquear anuncios de la mayor parte de internet, tu propio Netflix o Spotify privado para películas o canciones que tienes localmente, o algo más sencillo, una página web donde te presentes, el límite es tu imaginación (y tu tiempo libre jaja :])</p>
+
+<h3 id="cómo-funciona-realmente-tu-computadora">¿Cómo funciona realmente tu computadora?</h3>
+
+<p>Siempre es interesante entender que hace tu computadora, su sistema operativo, como es que se escucha por las bocinas, como se ve por el monitor, como se conecta a internet, estas cosas no es fácil aprender en Windows o MacOS pero en Linux te encuentras a un clic de distancia de aprenderlo.</p>
+
+<h3 id="otra-distribución-de-linux">Otra distribución de Linux</h3>
+
+<p>En esta guía instalamos kubuntu que creo puede ser lo más sencillo para novatos, pero puedes intentar instalar cosas más complejas, al menos en maquinas virtuales. Algunas distribuciones que te pueden interesar son: <a href="https://getfedora.org/es/">Fedora</a> y <a href="https://www.debian.org/">Debian</a> que son fáciles de instalar e interesantes para experimentar, <a href="https://archlinux.org/">Arch</a> que es util para entender que compone a un sistema operativo funcional o si te sientes curioso(y con tiempo libre), <a href="https://www.gentoo.org/">Gentoo</a> que es armar el sistema operativo desde 0.</p>
+
+<h2 id="otras-fuentes-de-información">Otras fuentes de información</h2>
+
+<p>Las listas no están en un orden en específico, todos son útiles o al menos interesantes</p>
+
+<h3 id="páginas-web">Páginas web</h3>
+
+<p><strong>Español</strong></p>
+<ul>
+  <li><a href="https://atareao.es/">atareao</a>: Una página web (también podcast) muy útil para tener introducciones a algunas tecnologías usadas en Linux, desde como personalización de tu escritorio, hasta el uso de contenedores, Raspberry pi, etc.</li>
+  <li><a href="/blog">¡EsteBlog!</a>: En este blog voy a subir posts sobre temas que me parecen interesantes, algunas veces simple, otras complejos, puedes visitarlo de ves en cuando para ver si hay algún post nuevo que te pueda interesar</li>
+</ul>
+
+<p><strong>Ingles</strong></p>
+<ul>
+  <li><a href="https://www.fosslinux.com/">FossLinux</a>: Guías y noticias sobre Linux en general</li>
+  <li><a href="https://linuxjourney.com/">LinuxJourney</a>: Un tipo de curso paso a paso para entender un poco mejor como funciona Linux.</li>
+</ul>
+
+<h3 id="canales-de-youtube">Canales de youtube:</h3>
+
+<p><strong>Ingles</strong></p>
+<ul>
+  <li><a href="https://www.youtube.com/channel/UCngn7SVujlvskHRvRKc1cTw">BugsWriter</a>: Un canal curioso pero interesante, no hay un tema en específico pero suele mostrar trucos con la terminal o compartir alguna opinión.</li>
+  <li><a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>: Un canal que habla sobre algunas noticias, temas interesantes o prueba distribuciones no tan comunes de Linux.</li>
+  <li><a href="https://iv.caol.tk/channel/UC8butISFwT-Wl7EV0hUK0BQ">FreeCodeCamp.org</a>: Un canal que recopila muchos tutoriales sobre tecnologías relacionadas con la computación en general.</li>
+  <li><a href="https://www.youtube.com/channel/UCXuqSBlHAE6Xw-yeJA0Tunw">LinusTechTips</a>: Un canal divertido, no siempre hablan de Linux pero si sobre tecnología.</li>
+  <li><a href="https://www.youtube.com/channel/UC2eYFnH61tmytImy1mTYvhA">LukeSmith</a>: Un canal con opiniones algo controversiales pero interesante de escuchar y contutoriales útiles.</li>
+  <li><a href="https://www.youtube.com/channel/UC9x0AN7BWHpCDHSm9NiJFJQ">NetworkChuck</a>: Un canal con cosas interesantes pero no profundas, si algo te interesa utiliza sus videos como introducción, e investiga más por tu cuenta.</li>
+  <li><a href="https://www.youtube.com/channel/UCsnGwSIHyoYN0kiINAGUKxg">Wolgsgang</a>: Un canal con diversos tips, tutoriales, videoblogs.</li>
+</ul>
+
+<p><strong>Español</strong></p>
+<ul>
+  <li><a href="https://www.youtube.com/channel/UCvGJtQRksuhexTz_f_DkJrA">EraUnix</a>: Canal principalmente enfocado en FreeBSD(Sistema Operativo Libre) pero que explica conceptos aplicados a muchos sistemas operativos.</li>
+  <li><a href="https://www.youtube.com/channel/UCDqXtc9GxROhLvFQ4bX6PLg">GunnarWolf</a>: Un profesor de Ingeniería de la UNAM que publica sus clases y alguna que otra conferencia.</li>
+  <li><a href="https://www.youtube.com/channel/UCllrFdkbcxcuAdzRHj-KSMA">LastDragon</a>: Canal sobre Linux más enfocado a servidores y el sistema más en profundidad, cuenta con un <a href="https://www.youtube.com/watch?v=Ue7Kw3lTdZ4">curso</a> de GNU/Linux.</li>
+  <li><a href="https://www.youtube.com/channel/UCrBzBOMcUVV8ryyAU_c6P5g">PeladoNerd</a>: Canal enfocado en la tecnología de contenedores, opiniones y entrevistas relacionadas con tecnología.</li>
+</ul>
+
+:ET

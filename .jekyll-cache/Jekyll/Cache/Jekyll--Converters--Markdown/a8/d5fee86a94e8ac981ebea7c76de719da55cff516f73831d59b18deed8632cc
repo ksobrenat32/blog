@@ -1,0 +1,154 @@
+I"�<h1 id="introducción">Introducción</h1>
+
+<p>Hola! En este post voy a explicar como tener un servidor de virtualización en una Raspberry Pi 4, aunque estas instrucciones no son exclusivas de la Raspberry pues se puede conseguir lo mismo en cualquier Hardware que tenga instalado GNU/Linux.</p>
+
+<p>La utilidad de un servidor de virtualización es básicamente infinita, puedes emular cualquier Hardware ya sea para probar distintos sistemas operativos o para aislar distintos servicios. En este caso al ser un Hardware relativamente débil y con poca memoria, como lo es la Raspberry Pi 4, no será posible correr múltiples máquinas virtuales.</p>
+
+<p>Además del servidor de virtualización, se configurará un puente de red, esto con el objetivo de poder acceder a las máquinas virtuales desde la red local.</p>
+
+<h1 id="qué-se-necesita">¿Qué se necesita?</h1>
+
+<ul>
+  <li>Computadora con Debian o derivada como sistema operativo y espacio suficiente para tus máquinas virtuales. (En este caso una Raspberry Pi 4, 4 GB RAM con micro sd de 64 GB).</li>
+  <li>Conexión de Ethernet para conectarte a la red.</li>
+  <li>Servidor SSH para conexión remota. (Es posible seguir la guía de forma local)</li>
+</ul>
+
+<h1 id="instalar-lo-necesario">Instalar lo necesario</h1>
+
+<p>En primer lugar es necesario instalar un conjunto de software para virtualizar. En este caso qemu-kvm</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt install qemu qemu-kvm qemu-system qemu-utils libvirt-clients libvirt-daemon-system virtinst virt-manager bridge-utils
+</code></pre></div></div>
+
+<p>Y activamos el demonio de libvirt</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl enable libvirtd
+</code></pre></div></div>
+
+<h1 id="puente-de-red">Puente de red</h1>
+
+<p>Ahora es necesario verificar nuestra conexión a la red, esto se puede conseguir con el comando</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip a
+</code></pre></div></div>
+
+<p><strong>Ejemplo del resultado</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+   		 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+		inet 127.0.0.1/8 scope host lo
+   			valid_lft forever preferred_lft forever
+		inet6 ::1/128 scope host 
+   			valid_lft forever preferred_lft forever
+2: enp1s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+		link/ether 52:54:00:da:fd:b4 brd ff:ff:ff:ff:ff:ff
+		inet 192.168.122.220/24 brd 192.168.122.255 scope global dynamic enp1s0
+   			valid_lft 3538sec preferred_lft 3538sec
+		inet6 fe80::5054:ff:feda:fdb4/64 scope link 
+   			valid_lft forever preferred_lft forever
+</code></pre></div></div>
+
+<p>Desde aquí podemos verificar que la interfaz de nuestra conexión por Ethernet tiene como nombre enp1s0 y la ip es 192.168.122.220, sabiendo esto podemos crear el puente, necesitamos entrar al archivo de configuración de interfaces. En Debian es /etc/network/interfaces</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /etc/network/interfaces
+</code></pre></div></div>
+
+<p>Dentro debemos de escribir la configuración del puente, tras modificar el archivo debe quedar así (revisa la ip, gateway y el nombre de la interfaz pues pueden no ser las mismas).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug enp1s0
+iface enp1s0 inet static
+
+auto br0
+iface br0 inet static
+	address 192.168.122.220
+	netmask 255.255.255.0
+	gateway 192.168.122.1
+	bridge_ports enp1s0
+	up /usr/sbin/brctl stp br0 on
+</code></pre></div></div>
+
+<p>Ya que estamos seguros de nuestra configuración, reiniciaremos para que estas configuraciones se apliquen. Al reiniciar podremos ver nuestra configuración algo así.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+		inet 127.0.0.1/8 scope host lo
+   			valid_lft forever preferred_lft forever
+		inet6 ::1/128 scope host 
+   			valid_lft forever preferred_lft forever
+2: enp1s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast master br0 state UP group default qlen 1000
+		link/ether 52:54:00:da:fd:b4 brd ff:ff:ff:ff:ff:ff
+3: br0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+		link/ether da:64:e7:16:20:c8 brd ff:ff:ff:ff:ff:ff
+		inet 192.168.122.220/24 brd 192.168.122.255 scope global br0
+   			valid_lft forever preferred_lft forever
+		inet6 fe80::d864:e7ff:fe16:20c8/64 scope link 
+   			valid_lft forever preferred_lft forever
+</code></pre></div></div>
+
+<p>Como podemos observar, ahora nuestra conexión se encuentra en la interfaz br0 que es nuestro puente.</p>
+
+<p><strong>¡Listo!</strong> Ya tenemos red, ahora podemos empezar a crear nuestras máquinas virtuales.</p>
+
+<h1 id="creación-de-máquinas-virtuales">Creación de máquinas virtuales</h1>
+
+<p>Para poder correr una máquina virtual, en primer lugar será necesario crear un disco para la máquina virtual.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Creamos el directorio para nuestros discos
+mkdir kvm
+
+# Creamos el disco, es posible cambiar el nombre y el tamaño del disco
+qemu-img create -f qcow2 ./debian.qcow2 8G
+
+# Agregamos la configuración para conectarnos con qemu mientras usemos los comandos virt-install y virsh
+mkdir -p ~/.config/libvirt/
+echo 'uri_default = "qemu:///system"' | tee -a ~/.config/libvirt/libvirt.conf
+</code></pre></div></div>
+
+<p>Ya que tenemos el disco, podemos instalar el sistema operativo.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>virt-install \
+	# Nombre de la máquina
+   		--name debian \
+	# Cantidad de memoria RAM
+		--memory 1024 \ 
+	# Ubicación del disco de la máquina virtual
+		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio \
+	# Número de núcleos para la maquina virtual
+		--vcpus 1 \
+		--os-type linux \
+	# Variante del sistema operativo
+		--os-variant debian10 \
+	# Nombre de la interfaz de red, en este caso br0
+		--network bridge=br0,model=virtio \
+	# Configuración sin interfaz gráfico
+		--graphics none \
+		--console pty,target_type=serial \
+	# Dirección de la instalación (cambiar la arquitectura si no usas arm64)
+		--location 'http://ftp.debian.org/debian/dists/buster/main/installer-arm64/' \
+		--extra-args 'console=ttyS0,115200n8 serial'
+</code></pre></div></div>
+
+<p>Continuamos con nuestra instalación normal y ya podemos usar la máquina virtual. Puedes aprender como administrar la máquina virtual con el comando</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>man virsh
+</code></pre></div></div>
+
+<h1 id="conclusión">Conclusión</h1>
+
+<p>Crear un servidor de virtualización suele sonar más complicado de lo que es, espero que esta guía te haya sido de utilidad. :)</p>
+
+<h3 id="algunas-fuentes">Algunas fuentes</h3>
+
+<p>Last Dragon .(2021). Configurar Debian como servidor de virtualizacion con QEMU/KVM . Video de Youtube: https://www.youtube.com/watch?v=ADqWvmDbY0o</p>
+:ET

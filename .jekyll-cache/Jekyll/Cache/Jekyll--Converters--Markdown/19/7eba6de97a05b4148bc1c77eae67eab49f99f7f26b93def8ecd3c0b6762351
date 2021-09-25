@@ -1,0 +1,36 @@
+I"j<p>Primero que nada, gracias por tomarte el tiempo de leer esto, la razón de esta guía es para tener un lugar a donde dirigir a amigos y familiares a los que quiero introducir al mundo de GNU/Linux y el software libre, darles a entender que en realidad no es necesario un gran conocimiento en computadoras, simplemente tener ganas de aprender. No importa si estás aquí porque estás cansado de Windows, su lentitud, sus problemas de privacidad, sus pantallas azules o sus actualizaciones en el peor momento, incluso por curiosidad propia, cualquier sea el caso, espero que esta guía te sirva de ayuda :)</p>
+
+<h3 id="como-navegar-en-esta-guía">Como navegar en esta guía</h3>
+
+<p>Está dividida de acuerdo a un pequeño nivel de dificultad:</p>
+
+<ol>
+  <li><a href="/blog/Usa-GNU-Linux/1">Instalación</a> : Instalación de una distribución GNU/Linux.</li>
+  <li><a href="/blog/Usa-GNU-Linux/2">Básico</a> : Entendamos lo básico linux.</li>
+  <li><a href="/blog/Usa-GNU-Linux/3">Software</a> : Mantenimiento e instalación de software.</li>
+  <li><a href="/blog/Usa-GNU-Linux/4">Extras</a> : ¿Qué más puedo hacer?</li>
+</ol>
+
+<p>Esta guía puede ampliarse en algún momento, pero es recomendable investigar por tu cuenta.</p>
+
+<p><em>No tengas miedo de investigar ;)</em></p>
+
+<h3 id="ventajas-del-software-libre">Ventajas del software libre</h3>
+
+<p>Llevar a cabo el cambio tiene sus ventajas,</p>
+
+<ul>
+  <li><strong>Gratis:</strong> no necesitas dar nada a cambio de usarlo, pero si te gusta y te gustaría apoyar, siempre puedes donar.</li>
+  <li><strong>Privacidad:</strong> no cuenta con telemetría o alguna forma de recolectar tu información.</li>
+  <li><strong>Seguridad:</strong> al ser de código abierto hay muchos ojos en el código, si existe un error es fácil y rápido que lo detecten y sea corregido.</li>
+  <li><strong>No hay virus:</strong> por la naturaleza de Unix y el software libre es casi imposible tener virus, los sistemas más seguros como servidores o sistemas operativos basados en la red Tor como <a href="https://tails.boum.org/">tails</a> tienen como base GNU/Linux.</li>
+  <li><strong>Conocimiento y control:</strong> Puedes aprender y controlar absolutamente todo, si quieres puedes desactivar algún componente, cambiar el aspecto o forma de trabajar, se puede hacer básicamente todo.</li>
+  <li><strong>Libertad:</strong> No te detienen ningunos términos de uso, puedes hacer lo que desees con tu computadora.</li>
+</ul>
+
+<h4 id="notas">Notas</h4>
+
+<p>A lo largo de la guía llamaré linux para abreviar, pero lo correcto es llamarlo GNU/Linux pues el sistema operativo se compone tanto de las herramientas de GNU como el kernel Linux.</p>
+
+<p>Si encuentras un fallo ortográfico, de redacción, técnico o en general cualquier fallo, por favor, házmelo notar, si tienes cuenta de github abre un issue, de lo contrario mándame un mensaje, lo agradeceré mucho :)</p>
+:ET
