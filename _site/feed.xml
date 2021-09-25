@@ -1,4 +1,139 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-09-25T04:16:00+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Servidor de virtualización en Raspberry Pi 4</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server/" rel="alternate" type="text/html" title="Servidor de virtualización en Raspberry Pi 4" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server/">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-09-25T05:03:41+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Guía basica de nftables</title><link href="/blog/firewall/2021/09/25/nftables/" rel="alternate" type="text/html" title="Guía basica de nftables" /><published>2021-09-25T00:00:00+00:00</published><updated>2021-09-25T00:00:00+00:00</updated><id>/blog/firewall/2021/09/25/nftables</id><content type="html" xml:base="/blog/firewall/2021/09/25/nftables/">&lt;p&gt;Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)&lt;/p&gt;
+
+&lt;h1 id=&quot;qué-es&quot;&gt;¿Qué es?&lt;/h1&gt;
+
+&lt;p&gt;Si leemos la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;, nos enteramos que nftables no nada mas que el firewall del kernel de Linux, llegó para ser el sucesor de iptables, el tan conocido firewall, que por su estructura y sintaxis facilita la administración de firewall en sistemas Linux pudiendo reducir el número de reglas considerablemente&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Algo a tener en cuenta es que nftables está disponible en kernels &amp;gt;= 3.13, por lo que de tener un sistema con kernel menor, será difícil usarlo de forma correcta.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;por-qué-nftables&quot;&gt;¿Por qué nftables?&lt;/h1&gt;
+
+&lt;p&gt;Existen “front ends” del firewall de Linux como &lt;a href=&quot;https://wiki.ubuntu.com/UncomplicatedFirewall&quot;&gt;UFW&lt;/a&gt; o &lt;a href=&quot;https://firewalld.org/&quot;&gt;firewalld&lt;/a&gt; que pueden facilitar la configuración de un sistema, sin embargo, al final estos programas corren nftables por debajo, por lo que al tratar con nftables por default, simplificamos el sistema, a cambio de dificultarnos funciones como las zonas de firewalld. Sin embargo, si tu sistema es un pequeño servidor casero o en algún vps, puede ser que te convenga simplemente tratar con nftables.&lt;/p&gt;
+
+&lt;h1 id=&quot;cómo-usar-nftables&quot;&gt;¿Cómo usar nftables?&lt;/h1&gt;
+
+&lt;p&gt;Primero que nada tenemos que saber si no hay otro firewall corriendo, en caso de estar, desactivarlo y opcionalmente desinstalarlo. Ya que no tenemos nada corriendo, podemos empezar a interactuar con el comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nft&lt;/code&gt;, esto siempre con privilegios de root.&lt;/p&gt;
+
+&lt;p&gt;Nftables se maneja con tablas, cadenas y reglas, estando una dentro de la otra respectivamente, para listar la configuración actual, se usa:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo nft list ruleset Output default:
+
+table inet filter {
+	chain input {
+		type filter hook input priority filter; policy accept;
+	}
+	chain forward {
+		type filter hook forward priority filter; policy accept;
+	}
+	chain output {
+		type filter hook output priority filter; policy accept;
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Las reglas por default están claras, acepta TODO, como te imaginarás esto es algo un inseguro y poco practico.&lt;/p&gt;
+
+&lt;p&gt;Como podemos ver todo esta dentro de una sola tabla llamada “filter” de tipo inet, el &lt;strong&gt;tipo inet&lt;/strong&gt; significa que las reglas aplican tanto para ipv4 como para ipv6 (ya no mas duplicar reglas yei), dentro de la tabla se encuentran distintas &lt;strong&gt;cadenas&lt;/strong&gt;, &lt;em&gt;“input”&lt;/em&gt; que esta configurada como el filtro que va con dirección al sistema mismo desde el exterior, &lt;em&gt;“forward”&lt;/em&gt; que esta configurada como el filtro que va con redireccionamiento (esto no se suele usar a menos que estés usando nat o algo así) y &lt;em&gt;“output”&lt;/em&gt; que esta configurada como el filtro que va desde el sistema al exterior. Todas con la politica default de aceptar y no existen reglas dentro de estas, empecemos a crear algunas&lt;/p&gt;
+
+&lt;p&gt;Supongamos que queremos bloquear el puerto 80 (http), para hacer esto se usa:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo nft add rule inet filter input tcp dport 80 deny
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora supongamos que queremos bloquear el puerto 22 (ssh) para cierta ip externa, usamos:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo nft add rule inet filter input ip saddr 8.8.8.8 tcp dport 22 deny
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Como podemos ver, para arreglar reglas se usa
+	sudo nft add rule [familia] [tabla] [cadena] [declaración]&lt;/p&gt;
+
+&lt;p&gt;Podemos imprimir para ver como van las reglas con &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nft list ruleset&lt;/code&gt;, el output será:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;table inet filter {
+	chain input {
+		type filter hook input priority filter; policy accept;
+			tcp dport 80 deny
+			ip saddr 8.8.8.8 tcp dport 22 deny
+	}
+	chain forward {
+		type filter hook forward priority filter; policy accept;
+	}
+	chain output {
+		type filter hook output priority filter; policy accept;
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Sencillo, ¿no?, ¿y si queremos borrar alguna? Bueno para eso en primer lugar debes conocer el número “handle”, esto se puede hacer con &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo nft -a list ruleset&lt;/code&gt;, ejemplo:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;table inet filter { # handle 4
+	chain input { # handle 1
+		type filter hook input priority filter; policy accept;
+			tcp dport 80 deny # handle 5
+			ip saddr 8.8.8.8 tcp dport 22 deny # handle 6
+	}
+	chain forward { # handle 2
+		type filter hook forward priority filter; policy accept;
+	}
+	chain output { # handle 3
+		type filter hook output priority filter; policy accept;
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ya con el número de la regla, se puede borrar la regla con 
+	sudo nft delete rule [familia] [tabla] [cadena] handle [número]&lt;/p&gt;
+
+&lt;p&gt;Por ejemplo, para eliminar el bloqueo del puerto 80, usamos:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; sudo nft delete rule inet filter input handle 5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Bueno y ahora puedes pensar, ¿cómo puedo guardar estas reglas para cuando reinicie el servidor? Bueno esto se consigue escribiendo en el archivo &lt;strong&gt;“/etc/nftables.conf”&lt;/strong&gt; que es el que se ejecuta cuando inicia el servicio de nftables.&lt;/p&gt;
+
+&lt;h1 id=&quot;ejemplo-de-nftablesconf&quot;&gt;Ejemplo de nftables.conf&lt;/h1&gt;
+
+&lt;p&gt;En este ejemplo se bloquea TODO lo que quiera entrar al servidor pero deja salir TODO a menos que cumpla algunas de las reglas. Esta es una configuración buena pero te recomiendo investigues para agregar o cerrar puertos dependiendo de tus necesidades.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#!/usr/sbin/nft -f
+
+flush ruleset
+
+table inet filter {
+	# Tirar todo lo que venga de entrada por default
+	chain input {
+	type filter hook input priority filter; policy drop;
+		# Si la conección es invalida, tirarlo desde un inicio 
+		ct state invalid drop
+		# Si la conección ya se establecio, aceptarlo
+		ct state { established, related } accept
+		# Permitir el loopback pero no dejar que nada externo mande paquetes dentro
+		iif &quot;lo&quot; accept
+		iif != &quot;lo&quot; ip daddr 127.0.0.0/8
+		iif != &quot;lo&quot; ip6 daddr ::1
+		# Permitir el uso del ping
+		ip protocol icmp accept
+		ip6 nexthdr ipv6-icmp accept
+		# Puertos para servicios:
+		ip saddr 192.168.1.0/24 tcp dport 22 accept # Aceptar ssh de la red local
+		ip saddr 192.168.1.0/24 tcp dport 445 accept # Aceptar samba de la red local
+		tcp dport 443 accept # Aceptar https de cualquier origen
+	}
+	# Tirar todos los paqueter que se quieran redirigir
+	chain forward {
+	type filter hook forward priority filter; policy drop;
+	}
+	# Permitir todas las salidas
+	chain output {
+	type filter hook output priority filter; policy accept;
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización en Raspberry Pi 4</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server/" rel="alternate" type="text/html" title="Servidor de virtualización en Raspberry Pi 4" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server/">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
 
 &lt;p&gt;Hola! En este post voy a explicar como tener un servidor de virtualización en una Raspberry Pi 4, aunque estas instrucciones no son exclusivas de la Raspberry pues se puede conseguir lo mismo en cualquier Hardware que tenga instalado GNU/Linux.&lt;/p&gt;
 
