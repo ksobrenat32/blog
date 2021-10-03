@@ -2,6 +2,7 @@ title: Mi blog
 markdown: kramdown
 url: ""
 baseurl: "/blog"
+# The theme is from https://github.com/sharadcodes/jekyll-theme-dark-reader
 
 author:
   name: ksobrenatural

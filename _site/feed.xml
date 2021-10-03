@@ -1,4 +1,173 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-09-25T05:03:41+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Guía basica de nftables</title><link href="/blog/firewall/2021/09/25/nftables/" rel="alternate" type="text/html" title="Guía basica de nftables" /><published>2021-09-25T00:00:00+00:00</published><updated>2021-09-25T00:00:00+00:00</updated><id>/blog/firewall/2021/09/25/nftables</id><content type="html" xml:base="/blog/firewall/2021/09/25/nftables/">&lt;p&gt;Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-10-03T19:08:05+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Virtualización de Windows en GNU/Linux</title><link href="/blog/kvm-qemu/2021/10/02/winvirt" rel="alternate" type="text/html" title="Virtualización de Windows en GNU/Linux" /><published>2021-10-02T00:00:00+00:00</published><updated>2021-10-02T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/10/02/winvirt</id><content type="html" xml:base="/blog/kvm-qemu/2021/10/02/winvirt">&lt;p&gt;Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.&lt;/p&gt;
+
+&lt;h1 id=&quot;qué-es-la-virtualización&quot;&gt;¿Qué es la virtualización?&lt;/h1&gt;
+
+&lt;p&gt;La virtualización es una tecnología que permite simular que contamos con una computadora dentro de otra computadora, simulamos un disco, una conexión de red, memoria RAM, procesador, bueno entiendes, toda la computadora. Esto con el fin de correr programas de distintos sistemas operativos como es en este caso, aunque normalmente se usa para aislar pues en la virtualización convencional, la maquina simulada no sabe que es una simulación y no tiene acceso a la maquina real por lo que si algo malo pasara dentro de la máquina virtual, en la real solo es cuestión de borrar el archivo que contiene el disco y pum, la maquina virtual fue borrada.&lt;/p&gt;
+
+&lt;h1 id=&quot;requerimientos&quot;&gt;Requerimientos&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Computadora con virtualización activada en la BIOS.&lt;/li&gt;
+  &lt;li&gt;Espacio en disco libre mínimo de 40GB, recomendablemente un ssd.&lt;/li&gt;
+  &lt;li&gt;8 GB de RAM o mas para una experiencia cómoda.&lt;/li&gt;
+  &lt;li&gt;Procesador de al menos 2 núcleos, recomendablemente 4 núcleos o mas.&lt;/li&gt;
+  &lt;li&gt;Es recomendable tener buena refrigeración de la computadora.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;instalar-lo-necesario&quot;&gt;Instalar lo necesario&lt;/h1&gt;
+
+&lt;p&gt;En primer lugar necesitas instalar virt-manager que será el programa gráfico que usaremos para administrar la máquina virtual&lt;/p&gt;
+
+&lt;p&gt;En Debian&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install virt-manager
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;En Fedora&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dnf install virt-manager
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Este deberá de descargar todas las dependencias necesarias como kvm y qemu que son las herramientas que se usaran tras bambalinas.&lt;/p&gt;
+
+&lt;p&gt;En cuestión de archivos tenemos que descargar la &lt;a href=&quot;https://www.microsoft.com/es-mx/software-download/windows10ISO&quot;&gt;iso de Windows 10&lt;/a&gt; que es windows10 como tal y la &lt;a href=&quot;https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso&quot;&gt;iso de virtio&lt;/a&gt; que es lo que contiene los controladores necesarios para tener mejor rendimiento.&lt;/p&gt;
+
+&lt;h1 id=&quot;instalación-de-windows-10&quot;&gt;Instalación de Windows 10&lt;/h1&gt;
+
+&lt;p&gt;Abriremos virt-manager y daremos clic en “crear maquina virtual”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos instalación local&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos la ISO de Windows 10&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-03.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos el tipo de sistema operativo como Windows 10&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Configuramos el número de núcleos y la cantidad de RAM&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Configuramos el tamaño del disco que daremos para windows10&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Escribimos el nombre que deseemos que tenga la máquina virtual, es vital que activemos la opción de configuración previa a la instalación&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-08.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cambiamos el tipo de disco a “virtio”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cambiamos el tipo de red a “virtio”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos la opción de añadir hardware y configuramos la iso de virtio&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Iniciamos la máquina virtual e instalamos Windows como siempre&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-15.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-16.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos que no tenemos licencia (a menos que si tengas)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-17.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos la versión que deseamos instalar (a menos que ocupes funciones del pro, te recomiendo el home pues es mas ligero)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-18.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aceptamos términos y condiciones&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-19.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos instalación personalizada&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Podemos ver que no se detecta ningún disco, debemos de seleccionar “cargar controlador”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-21.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-22.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos el controlador que termine con “win10”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-24.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora podemos ver que tenemos el disco que creamos, lo seleccionamos  e instalamos.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-26.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-27.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Y damos a siguiente para empezar la instalación, toca esperar&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-28.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Toca la configuración de siempre al instalar Windows&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;De momento no tenemos red pues no hemos cargado el controlador, tendremos que seleccionar “no tengo internet” y crear una cuenta local&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-31.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-32.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;¡Ya entramos al escritorio!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-33.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tenemos que abrir administrador de dispositivos&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En otros dispositivos seleccionamos el controlador de Ethernet y damos a actualizar controlador&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-36.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos “Buscar controlador en mi equipo”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-38.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos el disco de virtio, en mi caso es el “E” y damos siguiente&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-39.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Vemos que detecta el controlador de virtio, y damos cerrar&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-41.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Este proceso se repite con todos los controladores de “Otros equipos” y también con el adaptador de pantalla.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Igualmente lo instalamos&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-43.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;¡Terminamos!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-44.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Puede que lo notes un poco lento pues Windows hace sus cosas de descargar actualizaciones y demás configuraciones pos-instalación, pero una vez que eso esté, podemos reiniciar y ya contaremos con una maquina virtual de Windows completamente funcional.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Espero que te haya sido de utilidad, en caso de querer activar Windows, te puedo recomendar utilizar &lt;a href=&quot;https://github.com/massgravel/Microsoft-Activation-Scripts&quot;&gt;MAS&lt;/a&gt; esto te permitirá personalizar el fondo de pantalla y demás :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.</summary></entry><entry><title type="html">Guía basica de nftables</title><link href="/blog/firewall/2021/09/25/nftables" rel="alternate" type="text/html" title="Guía basica de nftables" /><published>2021-09-25T00:00:00+00:00</published><updated>2021-09-25T00:00:00+00:00</updated><id>/blog/firewall/2021/09/25/nftables</id><content type="html" xml:base="/blog/firewall/2021/09/25/nftables">&lt;p&gt;Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)&lt;/p&gt;
 
 &lt;h1 id=&quot;qué-es&quot;&gt;¿Qué es?&lt;/h1&gt;
 
@@ -133,7 +302,7 @@ table inet filter {
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización en Raspberry Pi 4</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server/" rel="alternate" type="text/html" title="Servidor de virtualización en Raspberry Pi 4" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server/">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
+&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización en Raspberry Pi 4</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server" rel="alternate" type="text/html" title="Servidor de virtualización en Raspberry Pi 4" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
 
 &lt;p&gt;Hola! En este post voy a explicar como tener un servidor de virtualización en una Raspberry Pi 4, aunque estas instrucciones no son exclusivas de la Raspberry pues se puede conseguir lo mismo en cualquier Hardware que tenga instalado GNU/Linux.&lt;/p&gt;
 
@@ -285,7 +454,7 @@ echo 'uri_default = &quot;qemu:///system&quot;' | tee -a ~/.config/libvirt/libvi
 
 &lt;h3 id=&quot;algunas-fuentes&quot;&gt;Algunas fuentes&lt;/h3&gt;
 
-&lt;p&gt;Last Dragon .(2021). Configurar Debian como servidor de virtualizacion con QEMU/KVM . Video de Youtube: https://www.youtube.com/watch?v=ADqWvmDbY0o&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">¿Un blog?</title><link href="/blog/personal/2021/08/07/Intro/" rel="alternate" type="text/html" title="¿Un blog?" /><published>2021-08-07T00:00:00+00:00</published><updated>2021-08-07T00:00:00+00:00</updated><id>/blog/personal/2021/08/07/Intro</id><content type="html" xml:base="/blog/personal/2021/08/07/Intro/">&lt;p&gt;Este es mi post de introducción, intentare responder algunas preguntas que puedes tener apartir de la existencia de este blog.&lt;/p&gt;
+&lt;p&gt;Last Dragon .(2021). Configurar Debian como servidor de virtualizacion con QEMU/KVM . Video de Youtube: https://www.youtube.com/watch?v=ADqWvmDbY0o&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">¿Un blog?</title><link href="/blog/personal/2021/08/07/Intro" rel="alternate" type="text/html" title="¿Un blog?" /><published>2021-08-07T00:00:00+00:00</published><updated>2021-08-07T00:00:00+00:00</updated><id>/blog/personal/2021/08/07/Intro</id><content type="html" xml:base="/blog/personal/2021/08/07/Intro">&lt;p&gt;Este es mi post de introducción, intentare responder algunas preguntas que puedes tener apartir de la existencia de este blog.&lt;/p&gt;
 
 &lt;h4 id=&quot;por-qué-un-blog&quot;&gt;¿Por qué un blog?&lt;/h4&gt;
 &lt;p&gt;Pense en como podría tener mis notas o mini-tutoriales, tenerlas en github puede ser útil pero no es fácil compartirlo además de que ahí no lo documento en español por lo que si quiero dirigir a alguíen a mi documentación, el tema del lenguaje lo puede complicar por lo que llegué a la conclusión de que lo mejor será realizar post esporadicamente en este medio.&lt;/p&gt;
