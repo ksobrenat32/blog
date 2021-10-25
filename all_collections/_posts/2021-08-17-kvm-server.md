@@ -111,8 +111,13 @@ Para poder correr una máquina virtual, en primer lugar será necesario crear un
 	qemu-img create -f qcow2 ./debian.qcow2 8G
 
 	# Agregamos la configuración para conectarnos con qemu mientras usemos los comandos virt-install y virsh
+
 	mkdir -p ~/.config/libvirt/
 	echo 'uri_default = "qemu:///system"' | tee -a ~/.config/libvirt/libvirt.conf
+
+	# (Opcional) Agregamos a nuestro usuario al grupo libvirt
+
+	sudo usermod -a -G libvirt $(whoami)
 
 Ya que tenemos el disco, podemos instalar el sistema operativo.
 
