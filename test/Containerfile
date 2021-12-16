@@ -1,0 +1,15 @@
+# Container for runninc Jekyll
+FROM debian
+
+RUN apt-get update -y && apt-get install ruby-full build-essential -y
+RUN gem install jekyll bundler
+
+VOLUME ["/page"]
+WORKDIR /page
+
+CMD bundle install && bundle exec jekyll serve --livereload
+
+# --- Build it
+# podman build -t jekyll:0.1 . 
+# --- Deploy it
+# podman run -d --name blog --net=host -v /path/to/blog:/page jekyll:0.1
