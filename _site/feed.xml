@@ -1,4 +1,268 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-10-03T19:08:05+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Virtualización de Windows en GNU/Linux</title><link href="/blog/kvm-qemu/2021/10/02/winvirt" rel="alternate" type="text/html" title="Virtualización de Windows en GNU/Linux" /><published>2021-10-02T00:00:00+00:00</published><updated>2021-10-02T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/10/02/winvirt</id><content type="html" xml:base="/blog/kvm-qemu/2021/10/02/winvirt">&lt;p&gt;Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-12-16T19:08:04+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Servidor de lxc en Debian</title><link href="/blog/container/2021/12/16/lxc-server" rel="alternate" type="text/html" title="Servidor de lxc en Debian" /><published>2021-12-16T00:00:00+00:00</published><updated>2021-12-16T00:00:00+00:00</updated><id>/blog/container/2021/12/16/lxc-server</id><content type="html" xml:base="/blog/container/2021/12/16/lxc-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Hace tiempo hice una guía para crear un servidor de virtualización,
+ pero me dí cuenta que muchas veces no ocupamos una maquina virtual
+ entera, su disco, ram y cpu asignado puede llegar a ser mas de lo
+ que ocupamos. Además de que después de un tiempo, las imágenes de
+ disco aumentan mucho de tamaño. Para estos casos existen los
+ contenedores.&lt;/p&gt;
+
+&lt;p&gt;En esta guía explicaré como correr contenedores lxc en Debian 11,
+ además de configurar el puente de red para que los contenedores
+ puedan acceder a la red local.&lt;/p&gt;
+
+&lt;h2 id=&quot;qué-es-un-contenedor&quot;&gt;¿Qué es un contenedor?&lt;/h2&gt;
+
+&lt;p&gt;Los contenedores son simplemente procesos corriendo en el host, se
+ puede decir que son una especie de
+ &lt;a href=&quot;https://man7.org/linux/man-pages/man2/chroot.2.html&quot;&gt;chroot&lt;/a&gt; con
+ esteroides.&lt;/p&gt;
+
+&lt;p&gt;Los contenedores mas conocidos son los que se manipulan con
+ &lt;a href=&quot;https://www.docker.com/&quot;&gt;docker&lt;/a&gt; o &lt;a href=&quot;https://podman.io/&quot;&gt;podman&lt;/a&gt;,
+ sin embargo, estos se plantean para un solo proceso, comúnmente
+ una aplicación web, que se ve como algo sin importancia pues siempre
+ se puede borrar y crear otro rápidamente y sin mayor problema,
+ pero que tal si queremos el sistema operativo entero, con todo y su
+ init, pues para eso existe &lt;a href=&quot;https://en.wikipedia.org/wiki/LXC&quot;&gt;lxc&lt;/a&gt;
+ que trata a los contenedores mas como máquinas virtuales, sin dejar
+ de ser ligero pues sigue usando el mismo kernel que con la ayuda de
+ la combinación de &lt;a href=&quot;https://en.wikipedia.org/wiki/Cgroups&quot;&gt;cgroups&lt;/a&gt;
+ y &lt;a href=&quot;https://en.wikipedia.org/wiki/Linux_namespaces&quot;&gt;namespaces&lt;/a&gt;
+ consigue aislar los procesos completamente además de poder correr
+ rootless.&lt;/p&gt;
+
+&lt;h2 id=&quot;requerimientos&quot;&gt;Requerimientos&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Computadora con Debian o derivada.&lt;/li&gt;
+  &lt;li&gt;Conexión de Ethernet directa (Para el puente de red)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;instalar-lo-necesario&quot;&gt;Instalar lo necesario&lt;/h2&gt;
+
+&lt;p&gt;En primer lugar es necesario instalar lo necesario para correr
+ los contenedores y crear el puente.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install lxc libvirt0 bridge-utils uidmap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;puente-de-red&quot;&gt;Puente de red&lt;/h2&gt;
+
+&lt;p&gt;Ahora es necesario verificar nuestra conexión a la red, esto se
+ puede conseguir con el comando.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ip a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ejemplo-del-resultado&quot;&gt;Ejemplo del resultado&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+     valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+     valid_lft forever preferred_lft forever
+2: enp1s0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:da:fd:b4 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.220/24 brd 192.168.122.255 scope global dynamic enp1s0
+     valid_lft 3538sec preferred_lft 3538sec
+    inet6 fe80::5054:ff:feda:fdb4/64 scope link 
+     valid_lft forever preferred_lft forever
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Desde aquí podemos verificar que la interfaz de nuestra conexión
+ por Ethernet tiene como nombre enp1s0 y la ip es 192.168.122.220,
+ sabiendo esto podemos crear el puente, necesitamos entrar al archivo
+ de configuración de interfaces. En Debian es /etc/network/interfaces&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /etc/network/interfaces
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dentro debemos de escribir la configuración del puente, tras modificar
+ el archivo debe quedar así (revisa la ip, gateway y el nombre de la
+ interfaz pues pueden no ser las mismas).&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug enp1s0
+iface enp1s0 inet static
+
+auto br0
+iface br0 inet static
+    address 192.168.122.220
+    netmask 255.255.255.0
+    gateway 192.168.122.1
+    bridge_ports enp1s0
+    up /usr/sbin/brctl stp br0 on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ya que estamos seguros de nuestra configuración, reiniciaremos para
+ que estas configuraciones se apliquen. Al reiniciar podremos ver
+ nuestra configuración algo así.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+     inet 127.0.0.1/8 scope host lo
+      valid_lft forever preferred_lft forever
+     inet6 ::1/128 scope host 
+      valid_lft forever preferred_lft forever
+2: enp1s0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc pfifo_fast master br0 state UP group default qlen 1000
+     link/ether 52:54:00:da:fd:b4 brd ff:ff:ff:ff:ff:ff
+3: br0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+     link/ether da:64:e7:16:20:c8 brd ff:ff:ff:ff:ff:ff
+     inet 192.168.122.220/24 brd 192.168.122.255 scope global br0
+      valid_lft forever preferred_lft forever
+     inet6 fe80::d864:e7ff:fe16:20c8/64 scope link 
+      valid_lft forever preferred_lft forever
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Como podemos observar, ahora nuestra conexión se encuentra en la
+ interfaz br0 que es nuestro puente.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;¡Listo!&lt;/strong&gt; Ya tenemos red, ahora podemos empezar a crear nuestros
+ contenedores con lxc.&lt;/p&gt;
+
+&lt;h2 id=&quot;configuración-de-lxc&quot;&gt;Configuración de lxc&lt;/h2&gt;
+
+&lt;p&gt;Para correr contenedores sin root (lo mejor), debemos de revisar
+ algunas cosas, en primer lugar, asegurarnos que este habilitado
+ la función en el kernel.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo sysctl kernel.unprivileged_userns_clone
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Si es igual a 1, es que esta habilitado. En segundo lugar debemos
+ verificar que nuestro usuario tenga asignadas las uid y gid,
+ esto se hace con.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat /etc/s*id|grep $USER
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Debe de salir algo como&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usuario:100000:65536
+usuario:100000:65536
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Si todo es correcto, ahora modificaremos la configuración de lxc
+ en /etc/lxc/default.conf debe de estar así:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Subuid y subgid 
+lxc.idmap = u 0 100000 65536
+lxc.idmap = g 0 100000 65536
+
+# Configuración de red
+lxc.net.0.type = veth
+lxc.net.0.link = br0
+lxc.net.0.flags = up
+
+# Capacidades de los contenedores
+lxc.apparmor.profile = lxc-container-default-cgns
+# Puedes cambiar a 1 si vas a correr contenedor dentro
+# de contenedor.
+lxc.apparmor.allow_nesting = 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y /etc/lxc/lxc-usernet debe de verse así:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usuario veth br0 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Por último debemos de agregar una variable de ambiente, esto
+ se puede hacer en el .bashrc del usuario, debemos agregar:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export DOWNLOAD_KEYSERVER=&quot;hkp://keyserver.ubuntu.com&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;¡Listo!&lt;/p&gt;
+
+&lt;h2 id=&quot;cómo-usar-contenedores-lxc&quot;&gt;¿Cómo usar contenedores lxc?&lt;/h2&gt;
+
+&lt;p&gt;Como se mencionó al inicio, hicimos la configuración para
+ correr contenedores rootless por lo que estos comandos se
+ deben correr como usuario.&lt;/p&gt;
+
+&lt;h3 id=&quot;crear-un-contenedor&quot;&gt;Crear un contenedor&lt;/h3&gt;
+
+&lt;p&gt;Para usar un contenedor primero lo debemos de generar a partir
+ de una plantilla, en este caso la plantilla “download” y se
+ le asigna un nombre para identificarlo. La plantilla download
+ es especial, te permitirá crear un contenedor a partir de
+ varias distribuciones, escoge la que más te convenga.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lxc-create --name test -t download
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;manipular-el-contenedor&quot;&gt;Manipular el contenedor&lt;/h3&gt;
+
+&lt;p&gt;Para iniciar el contenedor en modo no privilegiado:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lxc-unpriv-start test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para obtener un shell dentro:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lxc-unpriv-attach test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para detener el contenedor:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lxc-stop test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;dudas&quot;&gt;Dudas&lt;/h2&gt;
+
+&lt;h3 id=&quot;no-tengo-red&quot;&gt;No tengo red&lt;/h3&gt;
+
+&lt;p&gt;Al tener que conectarse a la red local, al contenedor le toma
+ algo de tiempo recibir una ip, ten paciencia y probablemente
+ se resuelva.&lt;/p&gt;
+
+&lt;h3 id=&quot;me-marca-un-error-en-la-llave-gpg&quot;&gt;Me marca un error en la llave gpg&lt;/h3&gt;
+
+&lt;p&gt;Para eso es la variable que exportamos, sal y vuelve a entrar
+ para que se cargue correctamente.&lt;/p&gt;
+
+&lt;h3 id=&quot;error-en-la-configuración&quot;&gt;Error en la configuración&lt;/h3&gt;
+
+&lt;p&gt;Algunas veces se queja por no tener una configuración individual
+ del usuario, configurala en $HOME/.config/lxc/default.conf&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lxc.include = /etc/lxc/default.conf
+lxc.idmap = u 0 100000 65536
+lxc.idmap = g 0 100000 65536
+ 
+lxc.net.0.type = veth
+lxc.net.0.link = br0
+lxc.net.0.flags = up
+
+lxc.apparmor.profile = lxc-container-default-cgns
+lxc.apparmor.allow_nesting = 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;dónde-se-almacena-el-contenedor&quot;&gt;¿Dónde se almacena el contenedor?&lt;/h3&gt;
+
+&lt;p&gt;Los contenedores se almacenan en $HOME/.local/share/lxc en caso
+ de querer modificar su ubicación se puede hacer desde la
+ configuración individual de cada contenedor, en mi caso prefiero
+ hacer un soft link al directorio donde lo quiero.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Las máquinas virtuales son muy útiles pero muchas veces son mas
+ de lo que necesitamos, por lo que para la mayoría de casos un
+ contenedor lxc es mucho mas útil. Solo recuerda que no es el
+ mismo nivel de aislamiento. Espero que esta guía te haya sido
+ de utilidad, hasta luego. :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Virtualización de Windows en GNU/Linux</title><link href="/blog/kvm-qemu/2021/10/02/winvirt" rel="alternate" type="text/html" title="Virtualización de Windows en GNU/Linux" /><published>2021-10-02T00:00:00+00:00</published><updated>2021-10-02T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/10/02/winvirt</id><content type="html" xml:base="/blog/kvm-qemu/2021/10/02/winvirt">&lt;p&gt;Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.&lt;/p&gt;
 
 &lt;h1 id=&quot;qué-es-la-virtualización&quot;&gt;¿Qué es la virtualización?&lt;/h1&gt;
 
@@ -281,8 +545,8 @@ table inet filter {
 		ct state { established, related } accept
 		# Permitir el loopback pero no dejar que nada externo mande paquetes dentro
 		iif &quot;lo&quot; accept
-		iif != &quot;lo&quot; ip daddr 127.0.0.0/8
-		iif != &quot;lo&quot; ip6 daddr ::1
+		iif != &quot;lo&quot; ip daddr 127.0.0.1/8 drop
+		iif != &quot;lo&quot; ip6 daddr ::1/128 drop
 		# Permitir el uso del ping
 		ip protocol icmp accept
 		ip6 nexthdr ipv6-icmp accept
@@ -302,19 +566,19 @@ table inet filter {
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización en Raspberry Pi 4</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server" rel="alternate" type="text/html" title="Servidor de virtualización en Raspberry Pi 4" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
+&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server" rel="alternate" type="text/html" title="Servidor de virtualización" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
 
-&lt;p&gt;Hola! En este post voy a explicar como tener un servidor de virtualización en una Raspberry Pi 4, aunque estas instrucciones no son exclusivas de la Raspberry pues se puede conseguir lo mismo en cualquier Hardware que tenga instalado GNU/Linux.&lt;/p&gt;
+&lt;p&gt;Hola! En este post voy a explicar como tener un servidor de virtualización en Debian, aunque estas instrucciones no son exclusivas para debian, pues se puede conseguir lo mismo en cualquier instalación de GNU/Linux, solo que los comandos difieren un poco.&lt;/p&gt;
 
-&lt;p&gt;La utilidad de un servidor de virtualización es básicamente infinita, puedes emular cualquier Hardware ya sea para probar distintos sistemas operativos o para aislar distintos servicios. En este caso al ser un Hardware relativamente débil y con poca memoria, como lo es la Raspberry Pi 4, no será posible correr múltiples máquinas virtuales.&lt;/p&gt;
+&lt;p&gt;La utilidad de un servidor de virtualización es básicamente infinita, puedes emular cualquier Hardware ya sea para probar distintos sistemas operativos o para aislar distintos servicios, todo dependera de las posibilidades de tu hardware.&lt;/p&gt;
 
-&lt;p&gt;Además del servidor de virtualización, se configurará un puente de red, esto con el objetivo de poder acceder a las máquinas virtuales desde la red local.&lt;/p&gt;
+&lt;p&gt;Además del servidor de virtualización, se configurará un puente de red, esto con el objetivo de que las maquinas virtuales puedan acceder a la red local.&lt;/p&gt;
 
-&lt;h1 id=&quot;qué-se-necesita&quot;&gt;¿Qué se necesita?&lt;/h1&gt;
+&lt;h1 id=&quot;requerimientos&quot;&gt;Requerimientos&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Computadora con Debian o derivada como sistema operativo y espacio suficiente para tus máquinas virtuales. (En este caso una Raspberry Pi 4, 4 GB RAM con micro sd de 64 GB).&lt;/li&gt;
-  &lt;li&gt;Conexión de Ethernet para conectarte a la red.&lt;/li&gt;
+  &lt;li&gt;Computadora con Debian o derivada con Hardware de sobra para dar a maquinas virtuales&lt;/li&gt;
+  &lt;li&gt;Conexión de Ethernet directa.&lt;/li&gt;
   &lt;li&gt;Servidor SSH para conexión remota. (Es posible seguir la guía de forma local)&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -415,31 +679,29 @@ mkdir kvm
 qemu-img create -f qcow2 ./debian.qcow2 8G
 
 # Agregamos la configuración para conectarnos con qemu mientras usemos los comandos virt-install y virsh
+
 mkdir -p ~/.config/libvirt/
 echo 'uri_default = &quot;qemu:///system&quot;' | tee -a ~/.config/libvirt/libvirt.conf
+
+# (Opcional) Agregamos a nuestro usuario al grupo libvirt
+
+sudo usermod -a -G libvirt $(whoami)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Ya que tenemos el disco, podemos instalar el sistema operativo.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virt-install \
-	# Nombre de la máquina
-   		--name debian \
-	# Cantidad de memoria RAM
-		--memory 1024 \ 
-	# Ubicación del disco de la máquina virtual
-		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio \
-	# Número de núcleos para la maquina virtual
-		--vcpus 1 \
+   		--name debian `# Nombre de la máquina` \
+		--memory 1024 `# Cantidad de memoria RAM` \ 
+		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio `# Ubicación del disco de la máquina virtual` \
+		--vcpus 1 `# Número de núcleos para la maquina virtual` \
 		--os-type linux \
-	# Variante del sistema operativo
-		--os-variant debian10 \
-	# Nombre de la interfaz de red, en este caso br0
-		--network bridge=br0,model=virtio \
-	# Configuración sin interfaz gráfico
-		--graphics none \
+		--os-variant debian11 `# Variante del sistema operativo` \
+		--network bridge=br0,model=virtio `# Nombre de la interfaz de red, en este caso br0` \
+		--graphics none `# Configuración sin interfaz gráfico` \
 		--console pty,target_type=serial \
-	# Dirección de la instalación (cambiar la arquitectura si no usas arm64)
-		--location 'http://ftp.debian.org/debian/dists/buster/main/installer-arm64/' \
+		--location 'http://ftp.debian.org/debian/dists/bullseye/main/installer-amd64/' \
+		`# centos stream 9 'http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/'` \
 		--extra-args 'console=ttyS0,115200n8 serial'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
