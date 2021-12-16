@@ -154,19 +154,23 @@ Debe de salir algo como
 Si todo es correcto, ahora modificaremos la configuración de lxc
  en /etc/lxc/default.conf debe de estar así:
 
-    # Subuid y subgid 
+    # Configurar el mapeo de uid y gid 
     lxc.idmap = u 0 100000 65536
     lxc.idmap = g 0 100000 65536
 
     # Configuración de red
+    # Tipo veth para referirse a un puente de red
     lxc.net.0.type = veth
+    # La interfaz de puente que creamos antes
     lxc.net.0.link = br0
+    # Activar la red
     lxc.net.0.flags = up
 
     # Capacidades de los contenedores
+    # Configuración para apparmor, usar cgroups y namespaces.
     lxc.apparmor.profile = lxc-container-default-cgns
-    # Puedes cambiar a 1 si vas a correr contenedor dentro
-    # de contenedor.
+    # Capacidad de crear contenedores dentro del mismo contenedor.
+    # Cambia a 1 si deseas activarlo.
     lxc.apparmor.allow_nesting = 0
 
 Y /etc/lxc/lxc-usernet debe de verse así:
@@ -226,7 +230,8 @@ Para eso es la variable que exportamos, sal y vuelve a entrar
 ### Error en la configuración
 
 Algunas veces se queja por no tener una configuración individual
- del usuario, configurala en $HOME/.config/lxc/default.conf
+ del usuario, configurala en $HOME/.config/lxc/default.conf , 
+ debe llevar básicamente lo mismo que la configuración global.
 
     lxc.include = /etc/lxc/default.conf
     lxc.idmap = u 0 100000 65536
