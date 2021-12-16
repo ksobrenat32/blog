@@ -173,7 +173,9 @@ Si todo es correcto, ahora modificaremos la configuración de lxc
     # Cambia a 1 si deseas activarlo.
     lxc.apparmor.allow_nesting = 0
 
-Y /etc/lxc/lxc-usernet debe de verse así:
+Para la red se repite la declaración del archivo default.conf,
+ además añádiendo un límite a la cantidad de conecciones del 
+ usuario, el archivo /etc/lxc/lxc-usernet debe de verse así:
 
     usuario veth br0 10
 
@@ -230,7 +232,7 @@ Para eso es la variable que exportamos, sal y vuelve a entrar
 ### Error en la configuración
 
 Algunas veces se queja por no tener una configuración individual
- del usuario, configurala en $HOME/.config/lxc/default.conf , 
+ del usuario, configurala en $HOME/.config/lxc/default.conf ,
  debe llevar básicamente lo mismo que la configuración global.
 
     lxc.include = /etc/lxc/default.conf
