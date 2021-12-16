@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Servidor de virtualización en Raspberry Pi 4"
+title: "Servidor de virtualización"
 categories: kvm-qemu
 visible: 1
 author:
@@ -9,16 +9,16 @@ author:
 
 # Introducción
 
-Hola! En este post voy a explicar como tener un servidor de virtualización en una Raspberry Pi 4, aunque estas instrucciones no son exclusivas de la Raspberry pues se puede conseguir lo mismo en cualquier Hardware que tenga instalado GNU/Linux.
+Hola! En este post voy a explicar como tener un servidor de virtualización en Debian, aunque estas instrucciones no son exclusivas para debian, pues se puede conseguir lo mismo en cualquier instalación de GNU/Linux, solo que los comandos difieren un poco.
 
-La utilidad de un servidor de virtualización es básicamente infinita, puedes emular cualquier Hardware ya sea para probar distintos sistemas operativos o para aislar distintos servicios. En este caso al ser un Hardware relativamente débil y con poca memoria, como lo es la Raspberry Pi 4, no será posible correr múltiples máquinas virtuales.
+La utilidad de un servidor de virtualización es básicamente infinita, puedes emular cualquier Hardware ya sea para probar distintos sistemas operativos o para aislar distintos servicios, todo dependera de las posibilidades de tu hardware.
 
-Además del servidor de virtualización, se configurará un puente de red, esto con el objetivo de poder acceder a las máquinas virtuales desde la red local.
+Además del servidor de virtualización, se configurará un puente de red, esto con el objetivo de que las maquinas virtuales puedan acceder a la red local.
 
-# ¿Qué se necesita?
+# Requerimientos
 
-- Computadora con Debian o derivada como sistema operativo y espacio suficiente para tus máquinas virtuales. (En este caso una Raspberry Pi 4, 4 GB RAM con micro sd de 64 GB).
-- Conexión de Ethernet para conectarte a la red. 
+- Computadora con Debian o derivada con Hardware de sobra para dar a maquinas virtuales
+- Conexión de Ethernet directa. 
 - Servidor SSH para conexión remota. (Es posible seguir la guía de forma local)
 
 # Instalar lo necesario
@@ -122,24 +122,17 @@ Para poder correr una máquina virtual, en primer lugar será necesario crear un
 Ya que tenemos el disco, podemos instalar el sistema operativo.
 
 	virt-install \
-		# Nombre de la máquina
-   		--name debian \
-		# Cantidad de memoria RAM
-    		--memory 1024 \ 
-		# Ubicación del disco de la máquina virtual
-    		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio \
-		# Número de núcleos para la maquina virtual
-    		--vcpus 1 \
+   		--name debian `# Nombre de la máquina` \
+    		--memory 1024 `# Cantidad de memoria RAM` \ 
+    		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio `# Ubicación del disco de la máquina virtual` \
+    		--vcpus 1 `# Número de núcleos para la maquina virtual` \
     		--os-type linux \
-		# Variante del sistema operativo
-    		--os-variant debian10 \
-		# Nombre de la interfaz de red, en este caso br0
-    		--network bridge=br0,model=virtio \
-		# Configuración sin interfaz gráfico
-    		--graphics none \
+    		--os-variant debian11 `# Variante del sistema operativo` \
+    		--network bridge=br0,model=virtio `# Nombre de la interfaz de red, en este caso br0` \
+    		--graphics none `# Configuración sin interfaz gráfico` \
     		--console pty,target_type=serial \
-		# Dirección de la instalación (cambiar la arquitectura si no usas arm64)
-    		--location 'http://ftp.debian.org/debian/dists/buster/main/installer-arm64/' \
+    		--location 'http://ftp.debian.org/debian/dists/bullseye/main/installer-amd64/' \
+    		`# centos stream 9 'http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/'` \
     		--extra-args 'console=ttyS0,115200n8 serial'
 
 Continuamos con nuestra instalación normal y ya podemos usar la máquina virtual. Puedes aprender como administrar la máquina virtual con el comando
