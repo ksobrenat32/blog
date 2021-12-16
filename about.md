@@ -29,3 +29,10 @@ Si deseas hacer una donación económica, aquí se encuentra mi monedero
 
 [Mi Github](https://github.com/ksobrenat32)
 [Mi Correo](mailto:ksobrenatural.7r4ty@8shield.net)
+
+## Nota
+
+Si encuentras un fallo ortográfico, de redacción, técnico o en
+ general cualquier fallo, por favor, házmelo notar, si tienes
+ cuenta de github abre un issue, de lo contrario mándame un mensaje,
+ lo agradeceré mucho :)
