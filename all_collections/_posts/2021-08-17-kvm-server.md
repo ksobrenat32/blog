@@ -125,6 +125,8 @@ Ya que tenemos el disco, podemos instalar el sistema operativo.
    		--name debian `# Nombre de la máquina` \
     		--memory 1024 `# Cantidad de memoria RAM` \ 
     		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio `# Ubicación del disco de la máquina virtual` \
+		--virt-type kvm \
+		--cpu host \
     		--vcpus 1 `# Número de núcleos para la maquina virtual` \
     		--os-type linux \
     		--os-variant debian11 `# Variante del sistema operativo` \
