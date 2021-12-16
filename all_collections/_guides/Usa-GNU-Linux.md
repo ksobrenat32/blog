@@ -34,5 +34,3 @@ Llevar a cabo el cambio tiene sus ventajas,
 #### Notas ####
 
 A lo largo de la guía llamaré linux para abreviar, pero lo correcto es llamarlo GNU/Linux pues el sistema operativo se compone tanto de las herramientas de GNU como el kernel Linux.
-
-Si encuentras un fallo ortográfico, de redacción, técnico o en general cualquier fallo, por favor, házmelo notar, si tienes cuenta de github abre un issue, de lo contrario mándame un mensaje, lo agradeceré mucho :)
