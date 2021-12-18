@@ -1,4 +1,301 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-12-16T19:37:49+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Servidor de lxc en Debian</title><link href="/blog/container/2021/12/16/lxc-server" rel="alternate" type="text/html" title="Servidor de lxc en Debian" /><published>2021-12-16T00:00:00+00:00</published><updated>2021-12-16T00:00:00+00:00</updated><id>/blog/container/2021/12/16/lxc-server</id><content type="html" xml:base="/blog/container/2021/12/16/lxc-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-12-18T20:55:33+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Servidor de minecraft</title><link href="/blog/games/2021/12/18/minecraft-server" rel="alternate" type="text/html" title="Servidor de minecraft" /><published>2021-12-18T00:00:00+00:00</published><updated>2021-12-18T00:00:00+00:00</updated><id>/blog/games/2021/12/18/minecraft-server</id><content type="html" xml:base="/blog/games/2021/12/18/minecraft-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;A la mayoría de personas que conozco les gusta jugar
+ minecraft, es un juego increible, pero pocos saben
+ lo sencillo que es correr su propio servidor.&lt;/p&gt;
+
+&lt;p&gt;El este post explicaré como crear un servidor de
+ minecraft, usaremos el servidor modicado
+ &lt;a href=&quot;https://papermc.io/&quot;&gt;paper&lt;/a&gt; para poder usar los
+ pulugins que permiten jugar juntos a java y bedrock
+ aunque no hay que olvidar que el servidor sigue
+ siendo de java por lo que las dinamicas del juego
+ como las granjas siguen siendo de Java.&lt;/p&gt;
+
+&lt;h2 id=&quot;qué-es-un-servidor-de-minecraft&quot;&gt;¿Qué es un servidor de minecraft?&lt;/h2&gt;
+
+&lt;p&gt;Un servidor no es mas que una computadora, en este
+ caso corriendo minecraft. Aunque la administración
+ de un servidor parece complicada, haciendolo bien
+ la primera vez es fácil repetirlo.&lt;/p&gt;
+
+&lt;p&gt;El programa que correremos como servidor de minecraft
+ no es el original proporcionado por mojang pues ese
+ no permite el uso de pluggins además de que paper
+ tiene optimizaciones para volverlo mas ligero a
+ cambio de unas diferencias en unas dinamicas que
+ es dificil notar, en caso de que quieras una
+ experiencia 100% vanilla y no necesitas compatibilidad
+ con bedrock, puedes usar el ejecutable proporcionado
+ por mojang.&lt;/p&gt;
+
+&lt;h2 id=&quot;requerimientos&quot;&gt;Requerimientos&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Una computadora con GNU/Linux donde vayas a correr
+ el servidor, en este caso será en Azure* con la
+ distribución Debian 11.&lt;/li&gt;
+  &lt;li&gt;Amigos (jajaj si no para que crear un servidor).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;* Si eres estudiante y tu universidad tiene alguna
+ afiliación con Microsoft, es posible que seas candidato
+ a &lt;a href=&quot;https://azure.microsoft.com/en-us/free/students/&quot;&gt;azure for students&lt;/a&gt;
+ en donde puedes obtener 100 dolares gratis al año que
+ puedes usar para correr tu servidor por al menos 3 meses
+ con el plan B2s, planenado rotar el servidor entre la
+ cuenta de tus amigos puedes correrlo teoricamente para siempre.&lt;/p&gt;
+
+&lt;h2 id=&quot;configura-servidor&quot;&gt;Configura servidor&lt;/h2&gt;
+
+&lt;h3 id=&quot;1--entra-al-servidor-con-ssh&quot;&gt;1- Entra al servidor con ssh&lt;/h3&gt;
+
+&lt;p&gt;Esto ya es otro tema mas extenso de lo que va con esta guía,
+ pero a grandes rasgos en cualquier Sistema Operativo debes
+ poder correr en la terminal:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh usuario@1.1.1.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Te recomiendo usar solamente claves de ssh y cambiar la
+ configuración a no permitir el uso de contraseñas además
+ de cambiar el puerto para evitar lo mas posible el ataque
+ de bots. Te puedes guiar de &lt;a href=&quot;https://github.com/ksobrenat32/notes/blob/main/ssh/sshd_config&quot;&gt;mi configuración&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;2--configura-el-firewall&quot;&gt;2- Configura el firewall&lt;/h3&gt;
+
+&lt;p&gt;Esto igual dependerá de tu provedor si lo estas corriendo
+ localmente te recomiendo investigar como hacer port
+ forwarding desde tu router, si es desde un probedor como
+ azure verifica la configuración de red.&lt;/p&gt;
+
+&lt;p&gt;Los puertos que es necesario abrir son:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Bedrock&lt;/th&gt;
+      &lt;th&gt;Java&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;19132/udp&lt;/td&gt;
+      &lt;td&gt;25565/udp&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;19132/tcp&lt;/td&gt;
+      &lt;td&gt;25565/tcp&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Además no olvides el puerto que uses para ssh, usa el
+ protocolo tcp.&lt;/p&gt;
+
+&lt;h3 id=&quot;3--crea-la-estructura-y-prepara-la-configuración&quot;&gt;3- Crea la estructura y prepara la configuración&lt;/h3&gt;
+
+&lt;p&gt;En linux siempre es mejor correr los programas con el menor
+ privilegio, en este caso lo mejor es crear un usuario exclusivo
+ para correr el servidor. Esto se consigue con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo useradd -d /opt/minecraft/ -s /sbin/nologin -u 1635 minecraft
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A partir de ahí creamos los directorios y hacemos dueño al
+ usuario que acabamos de crear.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir /opt/minecraft
+chown -R minecraft: /opt/minecraft
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4--instalar-lo-necesario&quot;&gt;4- Instalar lo necesario&lt;/h3&gt;
+
+&lt;p&gt;El servidor ocupa una forma de correr java además de
+ una forma de descargar archivos de red, se puede instalar
+ con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install openjdk-17-jdk wget build-essential git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5--descargar-lo-necesario-e-instalar-el-servidor&quot;&gt;5- Descargar lo necesario e instalar el servidor&lt;/h3&gt;
+
+&lt;p&gt;En primer lugar debemos de entrar como el usuario que creamos.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo -u minecraft bash
+cd
+pwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Si todo esta bien, la respuesta al comando pwd será
+ /opt/minecraft.&lt;/p&gt;
+
+&lt;p&gt;Ahora crearemos varios directorios para mejor organización&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir downloads server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Empezaremos a descargar lo necesario&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd downloads
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Debes de bajar las ultimas versiones de:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://papermc.io/downloads&quot;&gt;paper&lt;/a&gt; : La ultima versión&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/&quot;&gt;geyser&lt;/a&gt; :
+ La versión “Geyser-Spigot.jar”&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/&quot;&gt;floodgate&lt;/a&gt; :
+ La versión “floodgate-spigot.jar”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Para bajarlo directamente en el servidor da click izquierdo
+ y copia la url. Ya teniendolo lo puedes descargar con wget,
+ ejemplo:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/81/downloads/paper-1.18.1-81.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Regresa a /opt/minecraft/server y crea los links, recuerda
+ haber descargado la última versión.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /opt/minecraft/server
+ln -s ../downloads/paper-1.18.1-81.jar paper-server.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y ya podemos correr el servidor por primera vez con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;java -jar paper-jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Hubo un error, claro, es por que no has aceptado los
+ terminos y condiciones, debes entrar al archivo
+ eula.txt y cambiar de false a true, se puede hacer
+ con el editor de texto nano.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nano eula.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora si, vuelve a correr el comando anterior. Puedes
+ probar si puedes ingresar pero de momento no podran
+ ingresar usuarios de java, para esto debemos configurar
+ los links a geyser y floodgate. En primer lugar para
+ detener el servidor se hace oprimiendo ctrl+c.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /opt/minecraft/server/plugins
+ln -s ../../downloads/Geyser-Spigot.jar .
+ln -s ../../downloads/floodgate-Spigot.jar .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Se va a tener que modificat la configuración de geyser
+ para que use floodgete, en el archivo /opt/minecraft/
+server/server/plugins/Geyser-Spigot/config.yml la linea
+ que debes cambiar es.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;auth-type: floodgate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Vuelve a correr el servidor&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /opt/minecraft/server
+java -jar paper-jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Deberas ver como inicia tanto Geyser como floodgate inician.
+ Como podras ver no es practico tener que estarlo iniciando
+ y perder el acceso a la terminal por lo que configuraremos
+ el rcon, en primer lugar activalo y ponle una contraseña.
+ Esto es desde el archivo server.propierties, las lineas:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rcon.port=25575
+broadcast-rcon-to-ops=true
+enable-rcon=true
+rcon.password=UnaContraseñaSuperSegura
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora debemos descargar un cliente de rcon.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /opt/minecraft
+git clone https://github.com/Tiiffi/mcrcon
+cd mcrcon
+make
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Listo, abre otra conección con ssh para correr el servidor y
+ en la otra terminal:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/opt/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto como ves, da acceso a la administración del servidor,
+ bueno, ya que vemos que todo funciona es momento de automatizar,
+ ya puedes salir del usuario minecraft.&lt;/p&gt;
+
+&lt;h3 id=&quot;6--marcarlo-como-servicio&quot;&gt;6- Marcarlo como servicio&lt;/h3&gt;
+
+&lt;p&gt;Para hacer que minecraft inicie junto al servidor, es necesario
+ crear  un servicio, en este caso en el archivo
+ /etc/systemd/system/minecraft-server.service y pegaremos lo
+ siguiente&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Unit]
+Description=Minecraft Server (Powered by paper)
+After=network.target
+
+[Service]
+User=minecraft
+ExecStart=/usr/bin/java -Xmx4096M -Xms512M -jar paper-server.jar nogui
+ExecStop=/opt/minecraft/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura stop
+WorkingDirectory=/opt/minecraft/server
+Nice=1
+KillMode=none
+SuccessExitStatus=0 1
+ProtectHome=true
+ProtectSystem=full
+PrivateDevices=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Cambiando tanto la contraseña como el valor de -Xmx al
+ valor de RAM máxima que queremos asignar al servidor.&lt;/p&gt;
+
+&lt;p&gt;Iniciamos el servicio con&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl enable --now minecraft-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y listo, el servidor corre como servicio, puedes cerrar
+ todas las terminales y veras que el servidor corre sin
+ problemas. Para acceder la unica forma es con rcon:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/opt/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;notas&quot;&gt;Notas&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Es 100% recomendable idear una forma de respaldo, de
+ preferencia diario.&lt;/li&gt;
+  &lt;li&gt;Es igualmente recomendable reiniciar el servidor al
+ menos una vez al día.&lt;/li&gt;
+  &lt;li&gt;Recuerda actualizar constantemente el servidor, fallas
+ como log4j surgen seguido.&lt;/li&gt;
+  &lt;li&gt;Hay mas formas de optimizar el server pero eso ya
+ es muy personalizado y fuera de esta guía.&lt;/li&gt;
+  &lt;li&gt;Te recomiendo tener un firewall aparte del que te
+ proporcione tu router o el servicio de nube que uses.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Un servidor de minecraft es un proyecto muy divertido para
+ convivir con amigos, solo recuerda que al ser un servicio
+ expuesto a internet siempre es posible que lo comprometan
+ ten mucho cuidado.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Servidor de lxc en Debian</title><link href="/blog/container/2021/12/16/lxc-server" rel="alternate" type="text/html" title="Servidor de lxc en Debian" /><published>2021-12-16T00:00:00+00:00</published><updated>2021-12-16T00:00:00+00:00</updated><id>/blog/container/2021/12/16/lxc-server</id><content type="html" xml:base="/blog/container/2021/12/16/lxc-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
 
 &lt;p&gt;Hace tiempo hice una guía para crear un servidor de virtualización,
  pero me dí cuenta que muchas veces no ocupamos una maquina virtual
@@ -55,7 +352,7 @@
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ip a
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;ejemplo-del-resultado&quot;&gt;Ejemplo del resultado&lt;/h3&gt;
+&lt;p&gt;Ejemplo del resultado:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -156,23 +453,29 @@ usuario:100000:65536
 &lt;p&gt;Si todo es correcto, ahora modificaremos la configuración de lxc
  en /etc/lxc/default.conf debe de estar así:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Subuid y subgid 
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Configurar el mapeo de uid y gid 
 lxc.idmap = u 0 100000 65536
 lxc.idmap = g 0 100000 65536
 
 # Configuración de red
+# Tipo veth para referirse a un puente de red
 lxc.net.0.type = veth
+# La interfaz de puente que creamos antes
 lxc.net.0.link = br0
+# Activar la red
 lxc.net.0.flags = up
 
 # Capacidades de los contenedores
+# Configuración para apparmor, usar cgroups y namespaces.
 lxc.apparmor.profile = lxc-container-default-cgns
-# Puedes cambiar a 1 si vas a correr contenedor dentro
-# de contenedor.
+# Capacidad de crear contenedores dentro del mismo contenedor.
+# Cambia a 1 si deseas activarlo.
 lxc.apparmor.allow_nesting = 0
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Y /etc/lxc/lxc-usernet debe de verse así:&lt;/p&gt;
+&lt;p&gt;Para la red se repite la declaración del archivo default.conf,
+ además añádiendo un límite a la cantidad de conecciones del 
+ usuario, el archivo /etc/lxc/lxc-usernet debe de verse así:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usuario veth br0 10
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -235,7 +538,8 @@ lxc.apparmor.allow_nesting = 0
 &lt;h3 id=&quot;error-en-la-configuración&quot;&gt;Error en la configuración&lt;/h3&gt;
 
 &lt;p&gt;Algunas veces se queja por no tener una configuración individual
- del usuario, configurala en $HOME/.config/lxc/default.conf&lt;/p&gt;
+ del usuario, configurala en $HOME/.config/lxc/default.conf ,
+ debe llevar básicamente lo mismo que la configuración global.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lxc.include = /etc/lxc/default.conf
 lxc.idmap = u 0 100000 65536
@@ -694,6 +998,8 @@ sudo usermod -a -G libvirt $(whoami)
    		--name debian `# Nombre de la máquina` \
 		--memory 1024 `# Cantidad de memoria RAM` \ 
 		--disk path=./debian.qcow2,size=8,format=qcow2,bus=virtio `# Ubicación del disco de la máquina virtual` \
+	--virt-type kvm \
+	--cpu host \
 		--vcpus 1 `# Número de núcleos para la maquina virtual` \
 		--os-type linux \
 		--os-variant debian11 `# Variante del sistema operativo` \
