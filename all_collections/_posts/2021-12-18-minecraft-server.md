@@ -10,30 +10,30 @@ author:
 ## Introducción
 
 A la mayoría de personas que conozco les gusta jugar
- minecraft, es un juego increible, pero pocos saben
+ minecraft, es un juego increíble, pero pocos saben
  lo sencillo que es correr su propio servidor.
 
 El este post explicaré como crear un servidor de
- minecraft, usaremos el servidor modicado
+ minecraft, usaremos el servidor modificado
  [paper](https://papermc.io/) para poder usar los
- pulugins que permiten jugar juntos a java y bedrock
+ plugins que permiten jugar juntos a java y bedrock
  aunque no hay que olvidar que el servidor sigue
- siendo de java por lo que las dinamicas del juego
+ siendo de java por lo que las dinámicas del juego
  como las granjas siguen siendo de Java.
 
 ## ¿Qué es un servidor de minecraft?
 
 Un servidor no es mas que una computadora, en este
  caso corriendo minecraft. Aunque la administración
- de un servidor parece complicada, haciendolo bien
- la primera vez es fácil repetirlo.
+ de un servidor parece complicada, haciéndolo bien
+ desde el inicio, el resto es fácil.
 
 El programa que correremos como servidor de minecraft
  no es el original proporcionado por mojang pues ese
- no permite el uso de pluggins además de que paper
+ no permite el uso de plugins además de que paper
  tiene optimizaciones para volverlo mas ligero a
- cambio de unas diferencias en unas dinamicas que
- es dificil notar, en caso de que quieras una
+ cambio de unas diferencias en unas dinámicas que
+ es difícil notar, en caso de que quieras una
  experiencia 100% vanilla y no necesitas compatibilidad
  con bedrock, puedes usar el ejecutable proporcionado
  por mojang.
@@ -51,7 +51,7 @@ El programa que correremos como servidor de minecraft
  en donde puedes obtener 100 dolares gratis al año que
  puedes usar para correr tu servidor por al menos 3 meses
  con el plan B2s, planenado rotar el servidor entre la
- cuenta de tus amigos puedes correrlo teoricamente para siempre.
+ cuenta de tus amigos puedes correrlo teóricamente para siempre.
 
 ## Configura servidor
 
@@ -70,9 +70,9 @@ Te recomiendo usar solamente claves de ssh y cambiar la
 
 ### 2- Configura el firewall
 
-Esto igual dependerá de tu provedor si lo estas corriendo
+Esto igual dependerá de tu proveedor si lo estas corriendo
  localmente te recomiendo investigar como hacer port
- forwarding desde tu router, si es desde un probedor como
+ forwarding desde tu router, si es desde un proveedor como
  azure verifica la configuración de red.
 
 Los puertos que es necesario abrir son:
@@ -135,7 +135,7 @@ Debes de bajar las ultimas versiones de:
  La versión "floodgate-spigot.jar"
 
 Para bajarlo directamente en el servidor da click izquierdo
- y copia la url. Ya teniendolo lo puedes descargar con wget,
+ y copia la url. Ya teniéndolo lo puedes descargar con wget,
  ejemplo:
 
     wget https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/81/downloads/paper-1.18.1-81.jar
@@ -151,7 +151,7 @@ Y ya podemos correr el servidor por primera vez con:
     java -jar paper-jar
 
 Hubo un error, claro, es por que no has aceptado los
- terminos y condiciones, debes entrar al archivo
+ términos y condiciones, debes entrar al archivo
  eula.txt y cambiar de false a true, se puede hacer
  con el editor de texto nano.
 
@@ -159,7 +159,7 @@ Hubo un error, claro, es por que no has aceptado los
 
 Ahora si, vuelve a correr el comando anterior. Puedes
  probar si puedes ingresar pero de momento no podran
- ingresar usuarios de java, para esto debemos configurar
+ ingresar usuarios de bedrock, para esto debemos configurar
  los links a geyser y floodgate. En primer lugar para
  detener el servidor se hace oprimiendo ctrl+c.
 
@@ -167,8 +167,8 @@ Ahora si, vuelve a correr el comando anterior. Puedes
     ln -s ../../downloads/Geyser-Spigot.jar .
     ln -s ../../downloads/floodgate-Spigot.jar .
 
-Se va a tener que modificat la configuración de geyser
- para que use floodgete, en el archivo /opt/minecraft/
+Se va a tener que modificar la configuración de geyser
+ para que use floodgate, en el archivo /opt/minecraft/
 server/server/plugins/Geyser-Spigot/config.yml la linea
  que debes cambiar es.
 
@@ -179,8 +179,8 @@ Vuelve a correr el servidor
     cd /opt/minecraft/server
     java -jar paper-jar
 
-Deberas ver como inicia tanto Geyser como floodgate inician.
- Como podras ver no es practico tener que estarlo iniciando
+Deberás ver como inicia tanto Geyser como floodgate inician.
+ Como podrás ver no es practico tener que estarlo iniciando
  y perder el acceso a la terminal por lo que configuraremos
  el rcon, en primer lugar activalo y ponle una contraseña.
  Esto es desde el archivo server.propierties, las lineas:
@@ -197,7 +197,7 @@ Ahora debemos descargar un cliente de rcon.
     cd mcrcon
     make
 
-Listo, abre otra conección con ssh para correr el servidor y
+Listo, abre otra conexión con ssh para correr el servidor y
  en la otra terminal:
 
     /opt/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura
@@ -242,7 +242,7 @@ Iniciamos el servicio con
 
 Y listo, el servidor corre como servicio, puedes cerrar
  todas las terminales y veras que el servidor corre sin
- problemas. Para acceder la unica forma es con rcon:
+ problemas. Para acceder la única forma es con rcon:
 
     /opt/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura
 
