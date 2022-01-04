@@ -265,3 +265,11 @@ Un servidor de minecraft es un proyecto muy divertido para
  convivir con amigos, solo recuerda que al ser un servicio
  expuesto a internet siempre es posible que lo comprometan
  ten mucho cuidado.
+
+### Edit 1
+
+Escribí un post para que sirva como una guía básica a la
+creación y mantenimiento de un servidor linux como apoyo
+a esta guía.
+
+![]({{site.baseurl}}/server/2021/12/22/servidor-linux)
