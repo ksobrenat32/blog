@@ -1,30 +1,341 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog/" rel="alternate" type="text/html" /><updated>2021-12-18T20:55:33+00:00</updated><id>/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Servidor de minecraft</title><link href="/blog/games/2021/12/18/minecraft-server" rel="alternate" type="text/html" title="Servidor de minecraft" /><published>2021-12-18T00:00:00+00:00</published><updated>2021-12-18T00:00:00+00:00</updated><id>/blog/games/2021/12/18/minecraft-server</id><content type="html" xml:base="/blog/games/2021/12/18/minecraft-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://0.0.0.0:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/blog/" rel="alternate" type="text/html" /><updated>2022-05-27T20:54:11+00:00</updated><id>http://0.0.0.0:4000/blog/feed.xml</id><title type="html">Mi blog</title><author><name>ksobrenatural</name><email>ksobrenatural.7r4ty@8shield.net</email></author><entry><title type="html">Gestor de contraseñas</title><link href="http://0.0.0.0:4000/blog/privacy/2022/05/27/Bitwarden" rel="alternate" type="text/html" title="Gestor de contraseñas" /><published>2022-05-27T00:00:00+00:00</published><updated>2022-05-27T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/privacy/2022/05/27/Bitwarden</id><content type="html" xml:base="http://0.0.0.0:4000/blog/privacy/2022/05/27/Bitwarden">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Internet es un lugar inseguro, y nosotros como humanos no somos muy listos,
+ esto solo es una receta para el desastre y se demuestra con todas las veces
+ que se filtran contraseñas, a simple vista pensamos que no nos afecta,
+ hasta que nos damos cuenta que reutilizamos la misma contraseña desde hace
+ 10 años, tal vez con mínimas variaciones, un punto por aquí, un @ por allá
+ y a la larga lo único que pasa es que terminamos olvidandolo y
+ restableciendo la contraseña a la misma insegura de siempre, ¿acaso no hay
+ una solución mejor?&lt;/p&gt;
+
+&lt;p&gt;De hecho si, para eso fueron creados los gestores de contraseñas, piensalo
+ como una caja fuerte, ahí guardas contraseñas fuertes, difíciles,
+ imposibles de aprender, y solo tienes que aprender una, la de esa caja
+ fuerte, con esto podemos estar seguros de siempre tener una contraseña
+ compleja y diferente para cada servicio, sin riesgo a olvidarla.&lt;/p&gt;
+
+&lt;p&gt;Justo eso es &lt;a href=&quot;https://bitwarden.com/&quot;&gt;bitwarden&lt;/a&gt;, un gestor de contraseñas
+ FOSS, lo que permite que cualquiera lo pueda utilizar, es increíblemente
+ sencillo, versátil, seguro y lo mejor, gratuito.&lt;/p&gt;
+
+&lt;h2 id=&quot;requerimientos&quot;&gt;Requerimientos&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cuenta de correo para el registro&lt;/li&gt;
+  &lt;li&gt;Contraseña fuerte: Esta contraseña es esencial, debe ser lo más compleja
+ posible, esta nunca la debes haber usado antes y debe ser larga, puede que
+ no muy compleja, pero si larga, recomendaría mínimo 30 caracteres que no
+ es algo difícil, puedes juntar palabras sin relación pero que puedas
+ recordar fácilmente, algo como “Lápiz pista morado pan casa perro agua
+ tu-numero-de-la-suerte fecha importante @#$%#@” es muy seguro, pues al
+ ser larga, es básicamente imposible que logren descifrarla aún con una súper
+ computadora, solo recuerda evitar caracteres raros pues no todas las
+ computadoras los soportan y te podrías encontrar en una situación en la que
+ no puedas desbloquear tus contraseñas por que no tienes una ‘ñ’ o alguna
+ cosa así, pues mejor evitarlo.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;registro&quot;&gt;Registro&lt;/h2&gt;
+
+&lt;p&gt;En primer lugar accedemos a la página de bitwarden.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Registro1.png&quot; alt=&quot;Registro1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Seleccionamos “Get Started” y tendremos que introducir nuestros datos.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Registro2.png&quot; alt=&quot;Registro2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En mi caso estoy usando un correo temporal, debes recordar que sin tu
+ contraseña maestra no podrás recuperar ninguna de tus demás contraseñas,
+ por lo que anotala en algún lugar al menos en lo que la memorizas, puedes
+ hacer uso de la pista, solo recuerda no ser muy explicito pues si la
+ intentas recuperar te mostrará ese mensaje.&lt;/p&gt;
+
+&lt;h2 id=&quot;uso-del-gestor&quot;&gt;Uso del gestor&lt;/h2&gt;
+
+&lt;p&gt;Ya que tienes cuenta, puedes entrar por medio del link de &lt;a href=&quot;https://vault.bitwarden.com/&quot;&gt;bitwarden&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Uso1.png&quot; alt=&quot;Uso1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Debes de confirmar tu correo para tener acceso a todas las funciones,
+ selecciona “Send Mail” y confirma el correo que te llegó.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Uso2.png&quot; alt=&quot;Uso2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Una última configuración es el tamaño default del generador de
+ contraseñas, a mi me gusta dejarlo así, de 32 caracteres y
+ mezclando, letras, números y caracteres especiales&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Uso3.png&quot; alt=&quot;Uso3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora desde el menú principal, podemos generar un Item, en este
+ caso un acceso, dentro del acceso mismo metemos los datos del
+ acceso y podemos generar una contraseña aleatoria nueva siguiendo
+ la configuración previa.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Uso4.png&quot; alt=&quot;Uso4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/Bitwarden/Uso5.png&quot; alt=&quot;Uso5&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora solo tenemos que meternos al Acceso creado con nombre
+ “google” y listo, podemos copiar tanto el usuario y la contraseña,
+ no hay necesidad ni si quiera de saber la contraseña pues siempre
+ podremos acceder a ella por medio de bitwarden.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Con esta herramienta se pueden mitigar muchas fallas humanas
+ relacionadas con contraseñas, lo único que quedaría es mejorar
+ el sudo de la aplicación, esto se puede hacer instalando las
+ aplicaciones de bitwarden en tu teléfono, computadora y para
+ más comodidad en tu mismo navegador.&lt;/p&gt;
+
+&lt;p&gt;Puedes agregar seguridad con la autenticación de dos factores
+ e incluso puedes correr tu propio servidor con el proyecto
+ &lt;a href=&quot;https://github.com/dani-garcia/vaultwarden&quot;&gt;vaultwarden&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Solo recuerda, tu contraseña maestra es lo más importante :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Un servidor con linux</title><link href="http://0.0.0.0:4000/blog/server/2021/12/22/servidor-linux" rel="alternate" type="text/html" title="Un servidor con linux" /><published>2021-12-22T00:00:00+00:00</published><updated>2021-12-22T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/server/2021/12/22/servidor-linux</id><content type="html" xml:base="http://0.0.0.0:4000/blog/server/2021/12/22/servidor-linux">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Después de escribir la guía para tener un servidor
+ de minecraft me di cuenta que hacía falta una guía
+ básica para tener un servidor seguro, así que
+ aquí esta, esta es la base no solo para un servidor
+ de minecraft, igual quieres mantener algunas páginas
+ web o simplemente aprender.&lt;/p&gt;
+
+&lt;p&gt;En esta guía usaré Debian que considero es la
+ distribución de GNU/Linux mejor para principiantes
+ a demás de ser muy estable y requerir relativamente
+ poco mantenimiento. Sin embargo es compatible con
+ las derivadas como Ubuntu y sus variantes, incluso
+ si tienes una interfaz gráfica, pero recuerda que
+ las interfaces gráficas consumen recursos como cpu
+ o ram que podrías estar utilizando en otros procesos.&lt;/p&gt;
+
+&lt;h2 id=&quot;requerimientos&quot;&gt;Requerimientos&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Una computadora dedicada a ser servidor o instancia
+ virtual en algún proveedor como Linode, Azure, Amazon (etc).&lt;/li&gt;
+  &lt;li&gt;Otra computadora, esta puede ser la que usas normalmente,
+ sin importar su sistema operativo aunque preferentemente
+ instala algún GNU/Linux.&lt;/li&gt;
+  &lt;li&gt;Conexión a internet en ambas computadoras, es muy
+ recomendable tener conexión por Ethernet si tienes
+ físicamente el servidor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;instalación-del-servidor&quot;&gt;Instalación del servidor&lt;/h2&gt;
+
+&lt;p&gt;Esta parte dependerá mucho, si tienes la computadora
+ te tocará instalar todo por tu cuenta, si usas un
+ proveedor de nube, solo escoge la última versión de
+ Debian&lt;/p&gt;
+
+&lt;p&gt;Para instalar un sistema con interfaz gráfica puedes
+ dirigirte a la guía de GNU/Linux del menú principal,
+ en ella se instala kubuntu, es ubuntu con la interfaz
+ gráfica de KDE, es algo pesado pero si le tienes miedo
+ a la terminal puedes usar eso.&lt;/p&gt;
+
+&lt;p&gt;Reitero, lo mejor es instalar Debian puro, como ese es
+ un tema por si solo, te dejo la &lt;a href=&quot;https://www.debian.org/releases/stable/amd64/&quot;&gt;guía oficial&lt;/a&gt;
+ puede que parezca algo larga pero te enseñará mucho, si no
+ entiendes el idioma puedes utilizar un traductor o
+ buscar los términos en internet. Igualmente puedes
+ buscar por tu cuenta otros recursos que te guíen
+ durante la instalación del sistema. No olvides
+ instalar ssh-server.&lt;/p&gt;
+
+&lt;h3 id=&quot;primer-arranque&quot;&gt;Primer arranque&lt;/h3&gt;
+
+&lt;p&gt;Una vez arrancado el sistema, y con ssh instalado, desde
+ tu otra computadora abre una terminal, en Linux y MacOS
+ es la terminal, en Windows puede ser cmd.&lt;/p&gt;
+
+&lt;p&gt;Tendrás que obtener la ip de la máquina nueva, si es un
+ proveedor seguramente te la proporcionará, si es una
+ computadora local tocará obtenerla. Puede ser a través
+ del router que es lo mas sencillo o a través de algún
+ programa que analice la red. Tu decide e investiga
+ como hacerlo.&lt;/p&gt;
+
+&lt;p&gt;Una vez obtengas la ip puedes usar desde tu terminal el
+ comando:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh usuario@1.2.3.4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Sustituyendo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;usuario&lt;/code&gt; por el usuario que creaste y
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.2.3.4&lt;/code&gt; por la ip de tu nuevo servidor, te pedirá la
+ contraseña del usuario.&lt;/p&gt;
+
+&lt;p&gt;Una vez con acceso al servidor lo primero que tienes
+ que hacer es actualizar el sistema, necesitas permiso
+ root para esto, si configuraste la contraseña de root
+ tendrás que logearte como root, se consigue con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;su
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ingresas la contraseña de root y listo, si no lo
+ configuraste es probable que puedas usar sudo con tu
+ contraseña de usuario, en ese caso será:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh&quot;&gt;SSH&lt;/h3&gt;
+
+&lt;p&gt;Ahora tocará configurar y reforzar lo que me parece mas
+ importante, el acceso por ssh. Lo mejor es dejar de
+ usar contraseñas pues alguien con suficiente tiempo
+ siempre podrá adivinarla, lo que se usa son las llaves
+ de ssh, estas son un par, privada y publica, la publica
+ es la que tienes en los servidores y la privada es la que
+ no compartes con nadie. En primer lugar salimos del
+ servidor, esto se hace con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para crear las claves se hará  desde tu maquina aparte,
+ esto sera con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -o -a 100 -t ed25519
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto generara una clave muy segura y corta a la vez, ahora
+ copiaremos la clave generada que termina con &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.pub&lt;/code&gt;, esa
+ es la clave publica, puedes copiarla al servidor con&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-copy-id usuario@1.2.3.4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Te pedirá tu contraseña y listo, pruebala saliendo del
+ servidor, y volviendo a entrar, ya no deberá de pedirte
+ contraseña, si funciona es momento de desactivar el
+ acceso por ssh, dentro del servidor debemos editar el
+ archivo de configuración de ssh, esto se hace con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo nano /etc/ssh/sshd_config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Abriendo el archivo puedes leer todo y escoger lo que
+ te convenga, lo que yo te recomiendo es seguir mi
+ &lt;a href=&quot;https://github.com/ksobrenat32/notes/blob/main/ssh/sshd_config&quot;&gt;archivo&lt;/a&gt;
+ de configuración como base, es importante recalcar
+ que los que tengan &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; al inicio son las configuraciones
+ que no tendrán efecto, se vuelven comentarios. De aquí
+ lo que te recomiendo cambiar es la última linea, descomentar
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AllowUsers&lt;/code&gt; y cambiar username por tu nombre de usuario.&lt;/p&gt;
+
+&lt;p&gt;Listo, puedes reiniciar el servicio de ssh con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl restart sshd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Sin cerrar esa terminal, abre otra y prueba conectarte con ssh
+ si funciona perfecto, la configuración sirve. En caso de que
+ no te de acceso, regresa a la terminal abierta e intenta
+ modificar las lineas, tarde o temprano podrás entrar, lo
+ importante es dejar:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Disable password authentication and empty passwords
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pues estas lineas son las que prohíben entrar con contraseñas
+ y admiten unicamente la clave ssh, además de estas es importante
+ tener:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Root Login not allowed
+PermitRootLogin no
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pues esta linea desactiva completamente el acceso de root por ssh
+, que es lo que mas intentan los bots.&lt;/p&gt;
+
+&lt;p&gt;Por ultimo, puedes cambiar el puerto de ssh, lo que hará que
+ menos bots intenten entrar, cambia el valor a uno entre 1024-
+65535, si tienes tu servidor en la nube, debes de recordar
+ actualizar el firewall para permitir acceso a ese puerto. Ademas
+ ahora para acceder al servidor, al comando de acceso le debes de
+ añadir &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p puerto&lt;/code&gt; por ejemplo, si escogiste el puerto 2392 sera:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh -p 2392 usuario@1.2.3.4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;firewall&quot;&gt;Firewall&lt;/h3&gt;
+
+&lt;p&gt;Todo servidor Linux debe tener un firewall, este será el que
+ impida el acceso del mundo exterior al servidor por medio de
+ ciertas reglas. Si eres principiante te recomiendo usar &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UFW&lt;/code&gt;
+ que es de los firewalls mas fáciles de administrar. Para
+ instalarlo se hace con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install ufw
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Por default todo el que quiera acceder esta bloqueado y solo
+ se permite la salida por lo que en primer lugar debemos de
+ permitir el acceso por ssh. En caso de que no hayas cambiado
+ el puerto por default será el puerto 22 en el protocolo tcp,
+ para permitir ese acceso es con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ufw allow 22
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Una vez que se permitió el acceso por ssh ya podemos activar
+ el firewall con:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ufw enable
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Listo, a partir de aquí puedes abrir los puertos que ocupes
+ por ejemplo 80 para http o 443 para https, si usas minecraft
+ java será 25565 o bedrock es 12132, todo dependerá de lo que
+ estés corriendo en el servidor.&lt;/p&gt;
+
+&lt;h2 id=&quot;listo&quot;&gt;Listo&lt;/h2&gt;
+
+&lt;p&gt;A partir de aquí ya puedes agregar lo que vayas necesitando, lo
+ mas vulnerable que es el firewall y el acceso por ssh ya es
+ más seguro que por default.&lt;/p&gt;
+
+&lt;p&gt;Como recomendaciones extras te recomendaría buscar como reforzar
+ los servicios que estés corriendo además de estar al pendiente
+ de los permisos que tiene cada programa, recuerda que siempre
+ es mejor que tenga los mínimos necesarios.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Servidor de minecraft</title><link href="http://0.0.0.0:4000/blog/games/2021/12/18/minecraft-server" rel="alternate" type="text/html" title="Servidor de minecraft" /><published>2021-12-18T00:00:00+00:00</published><updated>2021-12-18T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/games/2021/12/18/minecraft-server</id><content type="html" xml:base="http://0.0.0.0:4000/blog/games/2021/12/18/minecraft-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
 
 &lt;p&gt;A la mayoría de personas que conozco les gusta jugar
- minecraft, es un juego increible, pero pocos saben
+ minecraft, es un juego increíble, pero pocos saben
  lo sencillo que es correr su propio servidor.&lt;/p&gt;
 
 &lt;p&gt;El este post explicaré como crear un servidor de
- minecraft, usaremos el servidor modicado
+ minecraft, usaremos el servidor modificado
  &lt;a href=&quot;https://papermc.io/&quot;&gt;paper&lt;/a&gt; para poder usar los
- pulugins que permiten jugar juntos a java y bedrock
+ plugins que permiten jugar juntos a java y bedrock
  aunque no hay que olvidar que el servidor sigue
- siendo de java por lo que las dinamicas del juego
+ siendo de java por lo que las dinámicas del juego
  como las granjas siguen siendo de Java.&lt;/p&gt;
 
 &lt;h2 id=&quot;qué-es-un-servidor-de-minecraft&quot;&gt;¿Qué es un servidor de minecraft?&lt;/h2&gt;
 
 &lt;p&gt;Un servidor no es mas que una computadora, en este
  caso corriendo minecraft. Aunque la administración
- de un servidor parece complicada, haciendolo bien
- la primera vez es fácil repetirlo.&lt;/p&gt;
+ de un servidor parece complicada, haciéndolo bien
+ desde el inicio, el resto es fácil.&lt;/p&gt;
 
 &lt;p&gt;El programa que correremos como servidor de minecraft
  no es el original proporcionado por mojang pues ese
- no permite el uso de pluggins además de que paper
+ no permite el uso de plugins además de que paper
  tiene optimizaciones para volverlo mas ligero a
- cambio de unas diferencias en unas dinamicas que
- es dificil notar, en caso de que quieras una
+ cambio de unas diferencias en unas dinámicas que
+ es difícil notar, en caso de que quieras una
  experiencia 100% vanilla y no necesitas compatibilidad
  con bedrock, puedes usar el ejecutable proporcionado
  por mojang.&lt;/p&gt;
@@ -44,7 +355,7 @@
  en donde puedes obtener 100 dolares gratis al año que
  puedes usar para correr tu servidor por al menos 3 meses
  con el plan B2s, planenado rotar el servidor entre la
- cuenta de tus amigos puedes correrlo teoricamente para siempre.&lt;/p&gt;
+ cuenta de tus amigos puedes correrlo teóricamente para siempre.&lt;/p&gt;
 
 &lt;h2 id=&quot;configura-servidor&quot;&gt;Configura servidor&lt;/h2&gt;
 
@@ -64,9 +375,9 @@
 
 &lt;h3 id=&quot;2--configura-el-firewall&quot;&gt;2- Configura el firewall&lt;/h3&gt;
 
-&lt;p&gt;Esto igual dependerá de tu provedor si lo estas corriendo
+&lt;p&gt;Esto igual dependerá de tu proveedor si lo estas corriendo
  localmente te recomiendo investigar como hacer port
- forwarding desde tu router, si es desde un probedor como
+ forwarding desde tu router, si es desde un proveedor como
  azure verifica la configuración de red.&lt;/p&gt;
 
 &lt;p&gt;Los puertos que es necesario abrir son:&lt;/p&gt;
@@ -151,7 +462,7 @@ pwd
 &lt;/ul&gt;
 
 &lt;p&gt;Para bajarlo directamente en el servidor da click izquierdo
- y copia la url. Ya teniendolo lo puedes descargar con wget,
+ y copia la url. Ya teniéndolo lo puedes descargar con wget,
  ejemplo:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/81/downloads/paper-1.18.1-81.jar
@@ -170,7 +481,7 @@ ln -s ../downloads/paper-1.18.1-81.jar paper-server.jar
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Hubo un error, claro, es por que no has aceptado los
- terminos y condiciones, debes entrar al archivo
+ términos y condiciones, debes entrar al archivo
  eula.txt y cambiar de false a true, se puede hacer
  con el editor de texto nano.&lt;/p&gt;
 
@@ -179,7 +490,7 @@ ln -s ../downloads/paper-1.18.1-81.jar paper-server.jar
 
 &lt;p&gt;Ahora si, vuelve a correr el comando anterior. Puedes
  probar si puedes ingresar pero de momento no podran
- ingresar usuarios de java, para esto debemos configurar
+ ingresar usuarios de bedrock, para esto debemos configurar
  los links a geyser y floodgate. En primer lugar para
  detener el servidor se hace oprimiendo ctrl+c.&lt;/p&gt;
 
@@ -188,8 +499,8 @@ ln -s ../../downloads/Geyser-Spigot.jar .
 ln -s ../../downloads/floodgate-Spigot.jar .
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Se va a tener que modificat la configuración de geyser
- para que use floodgete, en el archivo /opt/minecraft/
+&lt;p&gt;Se va a tener que modificar la configuración de geyser
+ para que use floodgate, en el archivo /opt/minecraft/
 server/server/plugins/Geyser-Spigot/config.yml la linea
  que debes cambiar es.&lt;/p&gt;
 
@@ -202,8 +513,8 @@ server/server/plugins/Geyser-Spigot/config.yml la linea
 java -jar paper-jar
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Deberas ver como inicia tanto Geyser como floodgate inician.
- Como podras ver no es practico tener que estarlo iniciando
+&lt;p&gt;Deberás ver como inicia tanto Geyser como floodgate inician.
+ Como podrás ver no es practico tener que estarlo iniciando
  y perder el acceso a la terminal por lo que configuraremos
  el rcon, en primer lugar activalo y ponle una contraseña.
  Esto es desde el archivo server.propierties, las lineas:&lt;/p&gt;
@@ -222,7 +533,7 @@ cd mcrcon
 make
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Listo, abre otra conección con ssh para correr el servidor y
+&lt;p&gt;Listo, abre otra conexión con ssh para correr el servidor y
  en la otra terminal:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/opt/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura
@@ -270,7 +581,7 @@ WantedBy=multi-user.target
 
 &lt;p&gt;Y listo, el servidor corre como servicio, puedes cerrar
  todas las terminales y veras que el servidor corre sin
- problemas. Para acceder la unica forma es con rcon:&lt;/p&gt;
+ problemas. Para acceder la única forma es con rcon:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/opt/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p UnaContraseñaSuperSegura
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -295,7 +606,15 @@ WantedBy=multi-user.target
 &lt;p&gt;Un servidor de minecraft es un proyecto muy divertido para
  convivir con amigos, solo recuerda que al ser un servicio
  expuesto a internet siempre es posible que lo comprometan
- ten mucho cuidado.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Servidor de lxc en Debian</title><link href="/blog/container/2021/12/16/lxc-server" rel="alternate" type="text/html" title="Servidor de lxc en Debian" /><published>2021-12-16T00:00:00+00:00</published><updated>2021-12-16T00:00:00+00:00</updated><id>/blog/container/2021/12/16/lxc-server</id><content type="html" xml:base="/blog/container/2021/12/16/lxc-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
+ ten mucho cuidado.&lt;/p&gt;
+
+&lt;h3 id=&quot;edit-1&quot;&gt;Edit 1&lt;/h3&gt;
+
+&lt;p&gt;Escribí un post para que sirva como una guía básica a la
+creación y mantenimiento de un servidor linux como apoyo
+a esta guía.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/server/2021/12/22/servidor-linux&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Servidor de lxc en Debian</title><link href="http://0.0.0.0:4000/blog/container/2021/12/16/lxc-server" rel="alternate" type="text/html" title="Servidor de lxc en Debian" /><published>2021-12-16T00:00:00+00:00</published><updated>2021-12-16T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/container/2021/12/16/lxc-server</id><content type="html" xml:base="http://0.0.0.0:4000/blog/container/2021/12/16/lxc-server">&lt;h2 id=&quot;introducción&quot;&gt;Introducción&lt;/h2&gt;
 
 &lt;p&gt;Hace tiempo hice una guía para crear un servidor de virtualización,
  pero me dí cuenta que muchas veces no ocupamos una maquina virtual
@@ -566,7 +885,7 @@ lxc.apparmor.allow_nesting = 0
  de lo que necesitamos, por lo que para la mayoría de casos un
  contenedor lxc es mucho mas útil. Solo recuerda que no es el
  mismo nivel de aislamiento. Espero que esta guía te haya sido
- de utilidad, hasta luego. :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Virtualización de Windows en GNU/Linux</title><link href="/blog/kvm-qemu/2021/10/02/winvirt" rel="alternate" type="text/html" title="Virtualización de Windows en GNU/Linux" /><published>2021-10-02T00:00:00+00:00</published><updated>2021-10-02T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/10/02/winvirt</id><content type="html" xml:base="/blog/kvm-qemu/2021/10/02/winvirt">&lt;p&gt;Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.&lt;/p&gt;
+ de utilidad, hasta luego. :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">Virtualización de Windows en GNU/Linux</title><link href="http://0.0.0.0:4000/blog/kvm-qemu/2021/10/02/winvirt" rel="alternate" type="text/html" title="Virtualización de Windows en GNU/Linux" /><published>2021-10-02T00:00:00+00:00</published><updated>2021-10-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/kvm-qemu/2021/10/02/winvirt</id><content type="html" xml:base="http://0.0.0.0:4000/blog/kvm-qemu/2021/10/02/winvirt">&lt;p&gt;Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.&lt;/p&gt;
 
 &lt;h1 id=&quot;qué-es-la-virtualización&quot;&gt;¿Qué es la virtualización?&lt;/h1&gt;
 
@@ -735,7 +1054,7 @@ lxc.apparmor.allow_nesting = 0
 
 &lt;p&gt;&lt;img src=&quot;/blog/assets/pictures/winvirt/virt-45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Espero que te haya sido de utilidad, en caso de querer activar Windows, te puedo recomendar utilizar &lt;a href=&quot;https://github.com/massgravel/Microsoft-Activation-Scripts&quot;&gt;MAS&lt;/a&gt; esto te permitirá personalizar el fondo de pantalla y demás :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.</summary></entry><entry><title type="html">Guía basica de nftables</title><link href="/blog/firewall/2021/09/25/nftables" rel="alternate" type="text/html" title="Guía basica de nftables" /><published>2021-09-25T00:00:00+00:00</published><updated>2021-09-25T00:00:00+00:00</updated><id>/blog/firewall/2021/09/25/nftables</id><content type="html" xml:base="/blog/firewall/2021/09/25/nftables">&lt;p&gt;Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)&lt;/p&gt;
+&lt;p&gt;Espero que te haya sido de utilidad, en caso de querer activar Windows, te puedo recomendar utilizar &lt;a href=&quot;https://github.com/massgravel/Microsoft-Activation-Scripts&quot;&gt;MAS&lt;/a&gt; esto te permitirá personalizar el fondo de pantalla y demás :)&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Algunas veces mientras uso GNU/Linux por diversas cuestiones es necesario que use un programa que solo este disponible en sistemas Windows, no por eso es necesario instalar un Windows en una máquina real, para eso existe la virtualización.</summary></entry><entry><title type="html">Guía basica de nftables</title><link href="http://0.0.0.0:4000/blog/firewall/2021/09/25/nftables" rel="alternate" type="text/html" title="Guía basica de nftables" /><published>2021-09-25T00:00:00+00:00</published><updated>2021-09-25T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/firewall/2021/09/25/nftables</id><content type="html" xml:base="http://0.0.0.0:4000/blog/firewall/2021/09/25/nftables">&lt;p&gt;Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)&lt;/p&gt;
 
 &lt;h1 id=&quot;qué-es&quot;&gt;¿Qué es?&lt;/h1&gt;
 
@@ -870,7 +1189,7 @@ table inet filter {
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización</title><link href="/blog/kvm-qemu/2021/08/17/kvm-server" rel="alternate" type="text/html" title="Servidor de virtualización" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="/blog/kvm-qemu/2021/08/17/kvm-server">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
+&lt;p&gt;Y ya, es simple, se pueden agregar distintas tablas, cadenas y cada una de distinto tipo, si quieres saber más, te recomiendo leas la &lt;a href=&quot;https://wiki.nftables.org/wiki-nftables/index.php/Main_Page&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Hola! ¿qué tal estas? En este post voy a intentar explicar qué es nftables, por que y como usarlo junto con algunos ejemplos :)</summary></entry><entry><title type="html">Servidor de virtualización</title><link href="http://0.0.0.0:4000/blog/kvm-qemu/2021/08/17/kvm-server" rel="alternate" type="text/html" title="Servidor de virtualización" /><published>2021-08-17T00:00:00+00:00</published><updated>2021-08-17T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/kvm-qemu/2021/08/17/kvm-server</id><content type="html" xml:base="http://0.0.0.0:4000/blog/kvm-qemu/2021/08/17/kvm-server">&lt;h1 id=&quot;introducción&quot;&gt;Introducción&lt;/h1&gt;
 
 &lt;p&gt;Hola! En este post voy a explicar como tener un servidor de virtualización en Debian, aunque estas instrucciones no son exclusivas para debian, pues se puede conseguir lo mismo en cualquier instalación de GNU/Linux, solo que los comandos difieren un poco.&lt;/p&gt;
 
@@ -1022,7 +1341,7 @@ sudo usermod -a -G libvirt $(whoami)
 
 &lt;h3 id=&quot;algunas-fuentes&quot;&gt;Algunas fuentes&lt;/h3&gt;
 
-&lt;p&gt;Last Dragon .(2021). Configurar Debian como servidor de virtualizacion con QEMU/KVM . Video de Youtube: https://www.youtube.com/watch?v=ADqWvmDbY0o&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">¿Un blog?</title><link href="/blog/personal/2021/08/07/Intro" rel="alternate" type="text/html" title="¿Un blog?" /><published>2021-08-07T00:00:00+00:00</published><updated>2021-08-07T00:00:00+00:00</updated><id>/blog/personal/2021/08/07/Intro</id><content type="html" xml:base="/blog/personal/2021/08/07/Intro">&lt;p&gt;Este es mi post de introducción, intentare responder algunas preguntas que puedes tener apartir de la existencia de este blog.&lt;/p&gt;
+&lt;p&gt;Last Dragon .(2021). Configurar Debian como servidor de virtualizacion con QEMU/KVM . Video de Youtube: https://www.youtube.com/watch?v=ADqWvmDbY0o&lt;/p&gt;</content><author><name>[&quot;ksobrenatural&quot;]</name></author><summary type="html">Introducción</summary></entry><entry><title type="html">¿Un blog?</title><link href="http://0.0.0.0:4000/blog/personal/2021/08/07/Intro" rel="alternate" type="text/html" title="¿Un blog?" /><published>2021-08-07T00:00:00+00:00</published><updated>2021-08-07T00:00:00+00:00</updated><id>http://0.0.0.0:4000/blog/personal/2021/08/07/Intro</id><content type="html" xml:base="http://0.0.0.0:4000/blog/personal/2021/08/07/Intro">&lt;p&gt;Este es mi post de introducción, intentare responder algunas preguntas que puedes tener apartir de la existencia de este blog.&lt;/p&gt;
 
 &lt;h4 id=&quot;por-qué-un-blog&quot;&gt;¿Por qué un blog?&lt;/h4&gt;
 &lt;p&gt;Pense en como podría tener mis notas o mini-tutoriales, tenerlas en github puede ser útil pero no es fácil compartirlo además de que ahí no lo documento en español por lo que si quiero dirigir a alguíen a mi documentación, el tema del lenguaje lo puede complicar por lo que llegué a la conclusión de que lo mejor será realizar post esporadicamente en este medio.&lt;/p&gt;
